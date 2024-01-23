@@ -1,5 +1,6 @@
 package pl.romzes.wallpaperfinder
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,11 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import pl.romzes.wallpapers.utils.Connector
 
 
 class SearchFieldFragment : Fragment() {
 
     val TAG = "rmz"
+    var connector : Connector? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        this.connector = context as Connector
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +41,7 @@ class SearchFieldFragment : Fragment() {
         button?.setOnClickListener(View.OnClickListener {
             val textField = textField?.text
             Log.d(TAG, textField.toString())
+            connector?.sendResult(7, "text 777")
         })
     }
 }

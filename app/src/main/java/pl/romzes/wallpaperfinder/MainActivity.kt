@@ -6,8 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import pl.romzes.wallpapers.utils.Connector
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Connector {
 
     val TAG = "rmz"
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,5 +17,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun sendResult(number: Int, text: String) {
+        Log.d(TAG, number.toString() + ": " + text.toString())
+    }
 
 }
