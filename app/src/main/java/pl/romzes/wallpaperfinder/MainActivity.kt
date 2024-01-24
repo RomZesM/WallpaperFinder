@@ -18,6 +18,13 @@ class MainActivity : AppCompatActivity(), Connector {
     }
 
     override fun sendResult(number: Int, text: String) {
+        val resultFragment : SearchResultFragment = SearchResultFragment()
+        resultFragment.someResultData = text
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment_container_id, resultFragment)
+            commit()
+        }
+
         Log.d(TAG, number.toString() + ": " + text.toString())
     }
 
