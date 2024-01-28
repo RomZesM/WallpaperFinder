@@ -14,4 +14,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "WallpaperFinder"
-include(":app")
+include(":presentation")
+include(":data")
+include(":domain")
