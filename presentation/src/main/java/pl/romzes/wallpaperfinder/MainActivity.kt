@@ -3,8 +3,7 @@ package pl.romzes.wallpaperfinder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import pl.romzes.data.TestDataClass
-import pl.romzes.domain.TestDomainClass
+import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragment
 
 
 import pl.romzes.wallpapers.utils.Connector
@@ -16,12 +15,12 @@ class MainActivity : AppCompatActivity(), Connector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val test = TestDataClass().testDataFu()
-        val test2 = TestDomainClass().TestFromDomain()
     }
 
+
+    //todo -test fun, remove later
     override fun sendResult(number: Int, text: String) {
-        val resultFragment : SearchResultFragment = SearchResultFragment()
+        val resultFragment : ResultFragment = ResultFragment()
         resultFragment.someResultData = text
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container_id, resultFragment)

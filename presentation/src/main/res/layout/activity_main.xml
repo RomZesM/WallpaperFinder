@@ -8,7 +8,7 @@
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:name="pl.romzes.wallpaperfinder.SearchFieldFragment"
+        android:name="pl.romzes.wallpaperfinder.fragments.searchFragment.SearchFieldFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container_id"/>

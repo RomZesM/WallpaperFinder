@@ -1,4 +1,4 @@
-package pl.romzes.wallpaperfinder
+package pl.romzes.wallpaperfinder.fragments.resultFragment
 
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
 import pl.romzes.wallpaperfinder.model.ImagePreview
 
 
-class SearchResultFragment : Fragment() {
+class ResultFragment : Fragment() {
 
     var someResultData = "empty"
     val TAG = "rmz"
