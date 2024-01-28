@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import pl.romzes.data.interfaceImplmentations.ApiInterfaceImpl
+import pl.romzes.domain.usecases.GetImagesFromAPIUseCase
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
 import pl.romzes.wallpaperfinder.model.ImagePreview
@@ -26,7 +28,7 @@ class ResultFragment : Fragment() {
        ImagePreview(R.drawable.android_test, "url", "desription 03")
     )
     //add a ViewModel, we can use just ResultViewModel(), todo-QA-> what the difference?
-    private val resultViewModel : ResultViewModel by viewModels()
+    private val resultViewModel : ResultViewModel = ResultViewModel()
 
      override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +43,6 @@ class ResultFragment : Fragment() {
         super.onStart()
         //
           resultViewModel.testString.value = "Hello! ROmZeS!"
-
-
         //
         initRecyclerView()
         Log.d(TAG, someResultData.toString() + "result fragment")
