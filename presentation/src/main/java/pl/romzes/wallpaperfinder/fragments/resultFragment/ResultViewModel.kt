@@ -9,11 +9,22 @@ import pl.romzes.domain.usecases.GetImagesFromAPIUseCase
 class ResultViewModel() : ViewModel() {
     private val getImageFromApiUseCase = GetImagesFromAPIUseCase(ApiInterfaceImpl())
 
+    val userRequest  = MutableLiveData<Any>()
+
     val testString : MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
 
-    fun getImagesFromApi() : List<ImagePreview>{
-      return getImageFromApiUseCase.getUseCase()
+    fun getImagesFromApi(request: String?) : List<ImagePreview>{
+      return getImageFromApiUseCase.getUseCase(request)
     }
+
+    fun setUserRequest(msg : String) {
+        userRequest.value = msg;
+    }
+
+    fun getUserRequest() : String {
+        return userRequest.value.toString()
+    }
+
 }
