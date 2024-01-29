@@ -2,10 +2,12 @@ package pl.romzes.wallpaperfinder.fragments.resultFragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import pl.romzes.domain.model.ImagePreview
@@ -20,27 +22,42 @@ class ResultFragment : Fragment() {
     //todo get images from Retrofit
 
     //add a ViewModel, we can use just ResultViewModel(), todo-QA-> what the difference?
-    private val resultViewModel : ResultViewModel = ResultViewModel()
+    private val resultViewModel : ResultViewModel by viewModels<ResultViewModel>()
+
     lateinit var imageList : List<ImagePreview>
 
-        override fun onCreateView(
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        parentFragmentManager.setFragmentResultListener("requestKey",  requireActivity()) { requestKey, bundle ->
+            // We use a String here, but any type that can be put in a Bundle is supported.
+            val userReq = bundle.getString("Key")
+            // put result into ViewModel
+            resultViewModel.setUserRequest(userReq.toString())
+
+        }
+    }
+
+     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
      ): View? {
-        // Inflate the layout for this fragment
 
+
+       // Inflate the layout for this fragment
      return inflater.inflate(R.layout.fragment_search_result, container, false)
     }
 
-       override fun onStart() {
+    override fun onStart() {
         super.onStart()
         getImagesFromApi()
         initRecyclerView()
-        Log.d(TAG, R.id.image_template_id.toString())
+
     }
 
     private fun getImagesFromApi() {
-        imageList = resultViewModel.getImagesFromApi()
+        imageList = resultViewModel.getImagesFromApi(resultViewModel.getUserRequest())
     }
 
     //init recyclerView on a fragment

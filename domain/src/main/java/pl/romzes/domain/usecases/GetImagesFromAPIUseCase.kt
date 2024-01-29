@@ -6,7 +6,7 @@ import pl.romzes.domain.model.ImagePreview
 class GetImagesFromAPIUseCase (private val repoApi : ApiInterface){
 
     //todo check how it should be named
-    fun getUseCase() : List<ImagePreview>{
-        return repoApi.getImagesFromUnsplash()
+    fun getUseCase(request : String?) : List<ImagePreview>{
+        return repoApi.getImagesFromUnsplash(request)
     }
 }
