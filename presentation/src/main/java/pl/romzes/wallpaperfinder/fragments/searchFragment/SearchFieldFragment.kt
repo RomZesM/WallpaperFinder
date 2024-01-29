@@ -28,7 +28,8 @@ class SearchFieldFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        this.connector = context as Connector
+        this.connector = context as Connector //todo remove after all, this is aternative way
+                                                //to communicate between activities
     }
 
 
