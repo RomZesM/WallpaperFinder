@@ -1,5 +1,7 @@
 package pl.romzes.domain.interfaces
 
+import pl.romzes.domain.model.ImagePreview
+
 interface ApiInterface {
-    fun getImagesFromUnsplash() : String
+    fun getImagesFromUnsplash() : List<ImagePreview>
 }

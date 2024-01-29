@@ -1,6 +1,5 @@
 package pl.romzes.wallpaperfinder.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.databinding.ImagePreviewLayoutBinding
-import pl.romzes.data.models.ImagePreview
-import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragment
+import pl.romzes.domain.model.ImagePreview
 
 
+//todo make separate class?
 class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapter<ImagePreviewRVAdapter.ImagePreviewViewHolder>() {
 
     lateinit var imagePrewList : List<ImagePreview>
@@ -24,8 +23,6 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
         // we can use  val textView = item.findViewById<TextView>(R.id.image_description_id) instead
         //but bindingView is more usefully
         val binding  = ImagePreviewLayoutBinding.bind(item)
-       //place for image for glide
-        val imagePlace = binding.imagePreviewId
 
         //we would bind our item for display on RV with data from model
         fun bind(imagePreview: ImagePreview){
@@ -54,8 +51,8 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
 
         //Glidetesting todo - use real url for images
         Glide.with(fragment)
-            .load("https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Austria.svg/2560px-Flag_of_Austria.svg.png")
-            .into(holder.imagePlace)
+            .load(imagePrewList[position].imageUrl)
+            .into(holder.binding.imagePreviewId)
 
     }
 

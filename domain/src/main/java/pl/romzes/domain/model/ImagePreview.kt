@@ -1,4 +1,4 @@
-package pl.romzes.data.models
+package pl.romzes.domain.model
 
 data class ImagePreview(
     val imageId: Int,
