@@ -1,4 +1,4 @@
-package pl.romzes.wallpaperfinder.model
+package pl.romzes.data.models
 
 data class ImagePreview(
     val imageId: Int,

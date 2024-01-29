@@ -6,21 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import pl.romzes.data.interfaceImplmentations.ApiInterfaceImpl
-import pl.romzes.domain.usecases.GetImagesFromAPIUseCase
+import pl.romzes.data.models.ImagePreview
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
-import pl.romzes.wallpaperfinder.model.ImagePreview
 
 
 class ResultFragment : Fragment() {
 
     var someResultData = "empty"
     val TAG = "rmz"
-    val rvAdapter = ImagePreviewRVAdapter()
+    val rvAdapter = ImagePreviewRVAdapter(this)
     //todo get images from Retrofit
     val imageList = listOf<ImagePreview>(
         ImagePreview(R.drawable.android_test, "url", "desription 01"),
@@ -45,7 +42,7 @@ class ResultFragment : Fragment() {
           resultViewModel.testString.value = "Hello! ROmZeS!"
         //
         initRecyclerView()
-        Log.d(TAG, someResultData.toString() + "result fragment")
+        Log.d(TAG, R.id.image_template_id.toString())
     }
 
     //init recyclerView on a fragment
