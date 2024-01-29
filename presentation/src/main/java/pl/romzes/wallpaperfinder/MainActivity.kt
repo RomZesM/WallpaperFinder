@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), Connector {
     //todo -test fun, remove later
     override fun sendResult(number: Int, text: String) {
         val resultFragment : ResultFragment = ResultFragment()
-        resultFragment.someResultData = text
+
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment_container_id, resultFragment)
             commit()
