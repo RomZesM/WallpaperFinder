@@ -15,14 +15,10 @@ import retrofit2.Response
 
 
 class ResultViewModel() : ViewModel() {
-   val TAG = "rmz"
+    val TAG = "rmz"
     private val getImageFromApiUseCase = GetImagesFromAPIUseCase(ApiInterfaceImpl())
 
     val userRequest  = MutableLiveData<Any>()
-
-    val testString : MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
 
     //todo -> do not completely understand how it works
     val _response = MutableLiveData<Response<UnsplashData>?>()
@@ -42,7 +38,7 @@ class ResultViewModel() : ViewModel() {
             convertResponse()
         }
     }
-
+    //convert response from api into ImagePreview List
     suspend fun convertResponse(){
         val list = mutableListOf<ImagePreview>()
         Log.d(TAG,"From converter: "  + response.value?.body()?.results?.size.toString())
@@ -52,6 +48,7 @@ class ResultViewModel() : ViewModel() {
         }
         imagelist.postValue(list)
     }
+
 
     fun setUserRequest(msg : String) {
         userRequest.value = msg;

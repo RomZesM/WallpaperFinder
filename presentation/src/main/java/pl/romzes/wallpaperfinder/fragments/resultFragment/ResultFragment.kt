@@ -19,18 +19,11 @@ import retrofit2.Response
 
 class ResultFragment : Fragment() {
 
-    val TAG = "rmz"
+    val TAG = "rmz"//todo !del
     val rvAdapter = ImagePreviewRVAdapter(this)
-    //todo get images from Retrofit
 
-    //add a ViewModel, we can use just ResultViewModel(), todo-QA-> what the difference?
+    //add a ViewModel,
     private val resultViewModel : ResultViewModel by viewModels<ResultViewModel>()
-
-   // lateinit var imageList : List<ImagePreview>
-    val imageList = listOf<ImagePreview>(
-        ImagePreview(1, "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Madagascar.svg/2560px-Flag_of_Madagascar.svg.png", "desсription 01"),
-        ImagePreview(1, "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Poland.svg/2560px-Flag_of_Poland.svg.png", "desсription 02"),
-        ImagePreview(1, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1920px-Flag_of_Denmark.svg.png", "desсription 03"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +50,7 @@ class ResultFragment : Fragment() {
         super.onStart()
         getImagesFromApi()  //--here get image on user request
 
-        //observe data, wait for it updating
-        resultViewModel.response.observe(this) {responce ->
-            Log.d(TAG, "From resul fragment" + responce.toString())
-        }
+        //listen when list will be updated and start our recycler view.
         resultViewModel.imagelist.observe(this) {
             Log.d(TAG, "Finally - resultlist: " + it.size.toString())
             initRecyclerView()
@@ -69,7 +59,6 @@ class ResultFragment : Fragment() {
 
     private fun getImagesFromApi() {
         resultViewModel.getImagesFromApi(resultViewModel.getUserRequest())
-
     }
 
     //init recyclerView on a fragment
