@@ -42,5 +42,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation(project(":domain"))
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+// https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
 }

@@ -55,13 +55,13 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.bumptech.glide/glide
     implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
 
-    dependencies {
-        implementation("androidx.recyclerview:recyclerview:1.3.2")
-        // For control over item selection of both touch and mouse driven selection
-        implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-    }
-    implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2") {
-        // Excludes the support library because it's already included by Glide.
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    // For control over item selection of both touch and mouse driven selection
+    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
 
-    }
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+// https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
 }
