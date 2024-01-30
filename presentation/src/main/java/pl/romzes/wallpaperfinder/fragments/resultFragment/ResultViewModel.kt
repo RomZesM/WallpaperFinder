@@ -29,26 +29,21 @@ class ResultViewModel() : ViewModel() {
     }
 
     fun getImagesFromApi(request: String){
-
         viewModelScope.launch (Dispatchers.IO) {
             val unsplashResponse =  getImageFromApiUseCase.getUseCase(request)
             _response.postValue(unsplashResponse)
 
-            Log.d(TAG, unsplashResponse.toString())
-            convertResponse()
-        }
-    }
-    //convert response from api into ImagePreview List
-    suspend fun convertResponse(){
-        val list = mutableListOf<ImagePreview>()
-        Log.d(TAG,"From converter: "  + response.value?.body()?.results?.size.toString())
-        response.value?.body()?.results?.forEach {
+            Log.d(TAG, "From getImageApi: " +  unsplashResponse.toString())
+           // convertResponse()
+            val list = mutableListOf<ImagePreview>()
+          unsplashResponse.body()?.results?.forEach {
             val preview = ImagePreview(1, it.urls.regular, it.altDescription )
             list.add(preview)
         }
         imagelist.postValue(list)
-    }
 
+        }
+    }
 
     fun setUserRequest(msg : String) {
         userRequest.value = msg;

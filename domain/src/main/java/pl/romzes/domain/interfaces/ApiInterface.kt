@@ -7,6 +7,6 @@ import retrofit2.Response
 interface ApiInterface {
     fun getImagesFromUnsplashStub(request : String?) : List<ImagePreview>
 
-    suspend fun getImagesFromUnsplashApi() : Response<UnsplashData>
+    suspend fun getImagesFromUnsplashApi(request: String) : Response<UnsplashData>
 
 }

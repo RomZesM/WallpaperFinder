@@ -23,7 +23,7 @@ class ApiInterfaceImpl : ApiInterface {
         return imageList
     }
 
-    override suspend fun getImagesFromUnsplashApi() : Response<UnsplashData>{
+    override suspend fun getImagesFromUnsplashApi(request: String) : Response<UnsplashData>{
         val unsplashBaseUrl : String = "https://api.unsplash.com/"
 
         val api = Retrofit.Builder()
@@ -35,8 +35,8 @@ class ApiInterfaceImpl : ApiInterface {
         //hardcode adress
         //val response = api.searchImage().execute();
         //dynamic request - photos?query=autumn&per_page=30&orientation=landscape&client_id=Abed2b9A8CYciNLGC3Ilzfwkw9Lh4-aINn6yKl7ZOxc
-        var response = api.searchImageWithParams("dog", "10", "landscape", "Abed2b9A8CYciNLGC3Ilzfwkw9Lh4-aINn6yKl7ZOxc").execute()
-
+        var response = api.searchImageWithParams(request, "10", "landscape", "Abed2b9A8CYciNLGC3Ilzfwkw9Lh4-aINn6yKl7ZOxc").execute()
+        Log.d(TAG, "Response from the Interface: [" + request + "] : " + response)
         return response
     }
 
