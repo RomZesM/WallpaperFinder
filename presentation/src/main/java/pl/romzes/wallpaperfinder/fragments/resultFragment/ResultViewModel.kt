@@ -24,17 +24,33 @@ class ResultViewModel() : ViewModel() {
         MutableLiveData<String>()
     }
 
-
+    //todo -> do not completely understand how it works
     val _response = MutableLiveData<Response<UnsplashData>?>()
     val response : LiveData<Response<UnsplashData>?> = _response
+
+    val imagelist : MutableLiveData<List<ImagePreview>> by lazy{
+        MutableLiveData<List<ImagePreview>>()
+    }
+
     fun getImagesFromApi(request: String){
 
         viewModelScope.launch (Dispatchers.IO) {
-            val list =  getImageFromApiUseCase.getUseCase(request)
-            _response.postValue(list)
+            val unsplashResponse =  getImageFromApiUseCase.getUseCase(request)
+            _response.postValue(unsplashResponse)
 
-            Log.d(TAG, list.toString())
+            Log.d(TAG, unsplashResponse.toString())
+            convertResponse()
         }
+    }
+
+    suspend fun convertResponse(){
+        val list = mutableListOf<ImagePreview>()
+        Log.d(TAG,"From converter: "  + response.value?.body()?.results?.size.toString())
+        response.value?.body()?.results?.forEach {
+            val preview = ImagePreview(1, it.urls.regular, it.altDescription )
+            list.add(preview)
+        }
+        imagelist.postValue(list)
     }
 
     fun setUserRequest(msg : String) {

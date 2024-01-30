@@ -56,10 +56,14 @@ class ResultFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         getImagesFromApi()  //--here get image on user request
-        initRecyclerView()
+
         //observe data, wait for it updating
         resultViewModel.response.observe(this) {responce ->
             Log.d(TAG, "From resul fragment" + responce.toString())
+        }
+        resultViewModel.imagelist.observe(this) {
+            Log.d(TAG, "Finally - resultlist: " + it.size.toString())
+            initRecyclerView()
         }
     }
 
@@ -74,6 +78,6 @@ class ResultFragment : Fragment() {
         //config recyclerView
         recyclerView?.layoutManager = GridLayoutManager(context, 2) //set options for display elements on view
         recyclerView?.adapter = rvAdapter //attach adapter, we can change different adapters for display info in RV
-        rvAdapter.setImagePreviewIntoRecyclerView(imageList)
+        resultViewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it) }
     }
 }
