@@ -18,7 +18,7 @@ class ResultViewModel() : ViewModel() {
     val TAG = "rmz"
     private val getImageFromApiUseCase = GetImagesFromAPIUseCase(ApiInterfaceImpl())
 
-    val userRequest  = MutableLiveData<Any>()
+    //val userRequest = MutableLiveData<Any>()
 
     //todo -> do not completely understand how it works
     val _response = MutableLiveData<Response<UnsplashData>?>()
@@ -26,6 +26,10 @@ class ResultViewModel() : ViewModel() {
 
     val imagelist : MutableLiveData<List<ImagePreview>> by lazy{
         MutableLiveData<List<ImagePreview>>()
+    }
+
+    val userRequest : MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
     }
 
     fun getImagesFromApi(request: String){
