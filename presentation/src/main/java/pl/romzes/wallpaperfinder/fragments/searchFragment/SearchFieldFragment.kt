@@ -28,11 +28,9 @@ class SearchFieldFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        this.connector = context as Connector //todo remove after all, this is aternative way
+        this.connector = context as Connector // todo remove after all, this is aternative way
                                                 //to communicate between activities
     }
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +48,6 @@ class SearchFieldFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-
     }
 
     private fun buttonInit() {
@@ -58,12 +55,9 @@ class SearchFieldFragment : Fragment() {
         val textField : EditText?  = view?.findViewById(R.id.query_field_id)
 
         button?.setOnClickListener(View.OnClickListener {
-            val userRequest = textField?.text.toString()
-
-            //sent value to the resultFragment using FragmentManager
-            parentFragmentManager.setFragmentResult("requestKey", bundleOf("Key" to userRequest))
-
-            (requireActivity() as MainActivity).displayFragment(ResultFragment())
+          (requireActivity() as MainActivity).displayFragment(ResultFragment.newInstance(
+                request = textField?.text.toString()
+            ))
         })
     }
 }
