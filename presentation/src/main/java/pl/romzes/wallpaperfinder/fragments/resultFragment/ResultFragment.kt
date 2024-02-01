@@ -40,14 +40,13 @@ class ResultFragment : Fragment() {
         //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")
 
-        //todo del!
-        resultViewModel.userRequest.observe(this){
-            Log.d(TAG, "onCreate: " + it.toString())
-        }
+//        //todo del!
+//        resultViewModel.userRequest.observe(this){
+//            Log.d(TAG, "onCreate: " + it.toString())
+//        }
 
         //listen when list will be updated and start our recycler view.
         resultViewModel.imagelist.observe(this) {
-            Log.d(TAG, "Finally - resultlist: " + it.size.toString())
             initRecyclerView()
         }
     }
