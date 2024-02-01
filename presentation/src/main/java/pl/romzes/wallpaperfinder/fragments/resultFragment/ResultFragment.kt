@@ -11,9 +11,12 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import pl.romzes.domain.model.ImagePreview
+import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
-
+import pl.romzes.wallpaperfinder.fragments.detailsFragment.DetailsFragment
+import pl.romzes.wallpaperfinder.utils.MyOnClickListener
 
 
 class ResultFragment : Fragment() {
@@ -34,10 +37,10 @@ class ResultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //get search request from prevoius activity through  ARGUMENTS
+        //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")
 
-
+        //todo del!
         resultViewModel.userRequest.observe(this){
             Log.d(TAG, "onCreate: " + it.toString())
         }
@@ -74,10 +77,24 @@ class ResultFragment : Fragment() {
 
     //init recyclerView on a fragment
     private fun initRecyclerView() {
+       //set myonclickFunction in adapter
+        rvAdapter.setMyOnclickListener(object : MyOnClickListener{
+           //on click we open new fragment with parameters of images
+            //todo add some more parameters
+            override fun onClick(position: Int) {
+                (requireActivity() as MainActivity).displayFragment(DetailsFragment.newInstance(
+                    imageUrl = resultViewModel.imagelist.value?.get(position)?.imageUrl.toString(),
+                    imageDescription = resultViewModel.imagelist.value?.get(position)?.description.toString()
+
+                ))
+            }
+        })
+
          val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view_id) //get the recycler view from fragment
         //config recyclerView
         recyclerView?.layoutManager = GridLayoutManager(context, 2) //set options for display elements on view
         recyclerView?.adapter = rvAdapter //attach adapter, we can change different adapters for display info in RV
-        resultViewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it) }
+        resultViewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it)
+        }
     }
 }

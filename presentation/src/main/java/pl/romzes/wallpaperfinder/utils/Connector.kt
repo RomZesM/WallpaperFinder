@@ -1,5 +1,9 @@
 package pl.romzes.wallpapers.utils
 
+import pl.romzes.domain.model.ImagePreview
+
 interface Connector {
-   // fun sendResult(number : Int, text : String)
+    //fun sendImagePreview(imagePreview: ImagePreview)
+
+
 }
