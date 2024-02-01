@@ -56,7 +56,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
         holder.bind(imagePrewList[position])
 
         //place onclick from myInterface
-        holder.itemView.setOnClickListener {
+        holder.binding.imagePreviewId.setOnClickListener {
             if (myOnClickListener != null) {
                 myOnClickListener!!.onClick(position)
             }

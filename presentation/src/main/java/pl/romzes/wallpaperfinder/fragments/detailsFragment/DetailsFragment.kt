@@ -7,9 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import pl.romzes.domain.model.ImagePreview
+import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
+import pl.romzes.wallpaperfinder.utils.getImageFromURL
 import pl.romzes.wallpapers.utils.Connector
 
 class DetailsFragment : Fragment(), Connector {
@@ -38,9 +42,6 @@ class DetailsFragment : Fragment(), Connector {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        Log.d(TAG, "onCreateView - detailACt: " + imageDescription + " - " + imageUrl)
-
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
 
@@ -48,6 +49,11 @@ class DetailsFragment : Fragment(), Connector {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
+        //set text and image into fragment
+        val imageView = requireView().findViewById<ImageView>(R.id.detail_image_id)
+        val imageDescField  = requireView().findViewById<TextView>(R.id.detail_description_id)
+        imageUrl?.let { imageView.getImageFromURL(requireActivity() as MainActivity, it) }
+        imageDescField.text = imageDescription
     }
 
 
