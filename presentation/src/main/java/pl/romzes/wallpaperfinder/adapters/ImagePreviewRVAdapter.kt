@@ -1,6 +1,5 @@
 package pl.romzes.wallpaperfinder.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import com.bumptech.glide.Glide
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.databinding.ImagePreviewLayoutBinding
 import pl.romzes.domain.model.ImagePreview
-import pl.romzes.wallpaperfinder.utils.MyOnClickListener
+import pl.romzes.wallpaperfinder.utils.MyRecyclerViewOnClickListener
 
 
 //todo make separate class?
@@ -19,7 +18,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
     val TAG = "rmz"
     lateinit var imagePrewList : List<ImagePreview>
     //onclick listener, set through preview Fragment
-    private var myOnClickListener : MyOnClickListener? = null
+    private var myRecyclerViewOnClickListener : MyRecyclerViewOnClickListener? = null
 
     //that class contain reference to the objects - item, that wold be drown in RV
     //item in our case would be ->
@@ -34,9 +33,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
             //insert image by id //todo use glide here
             //binding.imagePreviewId.setImageResource(imagePreview.imageId)
             binding.imageDescriptionId.text = imagePreview.description
-//
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagePreviewViewHolder {
@@ -57,13 +54,16 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
 
         //place onclick from myInterface
         holder.binding.imagePreviewId.setOnClickListener {
-            if (myOnClickListener != null) {
-                myOnClickListener!!.onClick(position)
+            if (myRecyclerViewOnClickListener != null) {
+                myRecyclerViewOnClickListener!!.onClick(position)
             }
-
+        }
+        holder.binding.favouriteIconId.setOnClickListener{
+            if (myRecyclerViewOnClickListener != null) {
+                myRecyclerViewOnClickListener!!.favOnClick(imagePrewList[position])
+            }
         }
 
-        //Glidetesting
         Glide.with(fragment)
             .load(imagePrewList[position].imageUrl)
             .into(holder.binding.imagePreviewId)
@@ -76,8 +76,8 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
     }
 
     //add listener from outside as dependency
-    fun setMyOnclickListener(listener : MyOnClickListener){
-        this.myOnClickListener = listener;
+    fun setMyOnclickListener(listener : MyRecyclerViewOnClickListener){
+        this.myRecyclerViewOnClickListener = listener;
     }
 
 }

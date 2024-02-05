@@ -1,8 +1,11 @@
 package pl.romzes.wallpaperfinder.utils
 
+import android.widget.ImageView
 import pl.romzes.domain.model.ImagePreview
 
-interface MyOnClickListener {
+interface MyRecyclerViewOnClickListener {
 
     fun onClick(position: Int)
+
+    fun favOnClick(image : ImagePreview)
 }

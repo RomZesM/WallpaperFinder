@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +15,7 @@ import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
 import pl.romzes.wallpaperfinder.fragments.detailsFragment.DetailsFragment
-import pl.romzes.wallpaperfinder.utils.MyOnClickListener
+import pl.romzes.wallpaperfinder.utils.MyRecyclerViewOnClickListener
 
 
 class ResultFragment : Fragment() {
@@ -40,10 +39,6 @@ class ResultFragment : Fragment() {
         //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")
 
-//        //todo del!
-//        resultViewModel.userRequest.observe(this){
-//            Log.d(TAG, "onCreate: " + it.toString())
-//        }
 
         //listen when list will be updated and start our recycler view.
         resultViewModel.imagelist.observe(this) {
@@ -62,11 +57,10 @@ class ResultFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         getImagesFromApi()  //--here get image on user request
-
-
     }
 
     private fun getImagesFromApi() {
+       //todo do not load pages from api, need to use saved list
         var request = "random"
         if(userSearchRequest != null){
             request = userSearchRequest as String
@@ -77,7 +71,7 @@ class ResultFragment : Fragment() {
     //init recyclerView on a fragment
     private fun initRecyclerView() {
        //set myonclickFunction in adapter
-        rvAdapter.setMyOnclickListener(object : MyOnClickListener{
+        rvAdapter.setMyOnclickListener(object : MyRecyclerViewOnClickListener{
            //on click we open new fragment with parameters of images
             //todo add some more parameters
             override fun onClick(position: Int) {
@@ -86,6 +80,10 @@ class ResultFragment : Fragment() {
                     imageDescription = resultViewModel.imagelist.value?.get(position)?.description.toString()
 
                 ))
+            }
+
+            override fun favOnClick(image : ImagePreview) {
+                Log.d(TAG, "testOnClick: favourite was clicked - " + image.description)
             }
         })
 
