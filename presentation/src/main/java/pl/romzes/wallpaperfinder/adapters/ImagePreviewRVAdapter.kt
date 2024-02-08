@@ -1,5 +1,6 @@
 package pl.romzes.wallpaperfinder.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +63,20 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
             if (myRecyclerViewOnClickListener != null) {
                 myRecyclerViewOnClickListener!!.favOnClick(imagePrewList[position])
             }
+            //change icon after click
+
+
+            if (holder.binding.favouriteIconId.tag == null || holder.binding.favouriteIconId.tag == "empty"){
+                holder.binding.favouriteIconId.setImageResource(R.drawable.icon_heart_black)
+                //use tag to understand what item is it (we can use image id instead tag
+                holder.binding.favouriteIconId.tag = "black"
+            }
+            else {
+                holder.binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty)
+                holder.binding.favouriteIconId.tag = "empty"
+            }
+
+
         }
 
         Glide.with(fragment)

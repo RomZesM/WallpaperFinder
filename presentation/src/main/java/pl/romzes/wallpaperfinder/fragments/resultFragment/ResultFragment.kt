@@ -40,7 +40,7 @@ class ResultFragment : Fragment() {
         userSearchRequest = arguments?.getString("userRequest")
 
 
-        //listen when list will be updated and start our recycler view.
+
         resultViewModel.imagelist.observe(this) {
             initRecyclerView()
         }
@@ -81,7 +81,6 @@ class ResultFragment : Fragment() {
 
                 ))
             }
-
             override fun favOnClick(image : ImagePreview) {
                 Log.d(TAG, "testOnClick: favourite was clicked - " + image.description)
             }
