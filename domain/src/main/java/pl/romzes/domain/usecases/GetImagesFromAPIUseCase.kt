@@ -8,8 +8,6 @@ import kotlin.time.measureTime
 
 class GetImagesFromAPIUseCase (private val repoApi : ApiInterface){
 
-    //todo check how it should be named
-
     suspend fun  getUseCase(request : String) : Response<UnsplashData>{
         return  repoApi.getImagesFromUnsplashApi(request)
     }

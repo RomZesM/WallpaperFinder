@@ -57,6 +57,8 @@ class ResultFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         getImagesFromApi()  //--here get image on user request
+        //test db
+        context?.let { resultViewModel.saveFavouriteImage(it) }
     }
 
     private fun getImagesFromApi() {
