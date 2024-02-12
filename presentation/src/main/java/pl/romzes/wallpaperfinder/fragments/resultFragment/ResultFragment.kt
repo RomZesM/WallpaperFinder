@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -38,8 +39,8 @@ class ResultFragment : Fragment() {
         super.onCreate(savedInstanceState)
         //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")
-
-
+        //Change text in toolbox
+        activity?.findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.result_fragment)
 
         resultViewModel.imagelist.observe(this) {
             initRecyclerView()
