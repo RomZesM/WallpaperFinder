@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -45,5 +46,11 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
 // https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    //room
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    //livedata
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
 
 }
