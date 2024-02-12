@@ -3,6 +3,8 @@ package pl.romzes.wallpaperfinder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragment
@@ -24,6 +26,19 @@ class MainActivity : AppCompatActivity(), Connector {
         displayFragment(SearchFieldFragment())
     }
 
+    //add menu to ActionBar
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    //add listener for menu in action bar
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_open_fav_fragment_id){
+            Log.d(TAG, "onOptionsItemSelected: open favourite id" )
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     //todo -test fun, remove later
     fun displayFragment(fragment: Fragment) {
