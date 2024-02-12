@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import pl.romzes.wallpaperfinder.fragments.favouriteFragment.FavouriteFragment
 import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragment
 import pl.romzes.wallpaperfinder.fragments.searchFragment.SearchFieldFragment
 
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity(), Connector {
     //add listener for menu in action bar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_open_fav_fragment_id){
-            Log.d(TAG, "onOptionsItemSelected: open favourite id" )
+           displayFragment(FavouriteFragment())
         }
         return super.onOptionsItemSelected(item)
     }
