@@ -8,7 +8,7 @@ import pl.romzes.data.dao.ImagePreviewDao
 import pl.romzes.data.models.ImagePreviewEntity
 import pl.romzes.domain.model.ImagePreview
 
-@Database(entities = [ImagePreviewEntity::class], version = 1)
+@Database(entities = [ImagePreviewEntity::class], version = 2)
 abstract class MyDataBase : RoomDatabase(){
     //room will insert this dependency
     abstract fun getDao() : ImagePreviewDao
@@ -22,7 +22,9 @@ abstract class MyDataBase : RoomDatabase(){
                 context,         //get context main activity
                 MyDataBase::class.java,
                 "walpaper.db"
-            ).build()
+            )
+            .fallbackToDestructiveMigration() //delete previous db without data saving
+            .build()
         }
     }
 

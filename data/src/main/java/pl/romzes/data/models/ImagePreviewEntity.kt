@@ -8,16 +8,19 @@ import pl.romzes.domain.model.ImagePreview
 data class ImagePreviewEntity(
     @PrimaryKey(autoGenerate = true)
     val id : Int? = null, //null as default value, so room generate uniq id for every object
+    val unsplashId : String,
     val url : String,
-    val description : String
-
-
+    val description : String,
+    val width : Int,
+    val height : Int
 ){
     fun toImageView(): ImagePreview {
         return ImagePreview(
-            1,
+            unsplashId,
             url,
-            description
+            description,
+            width,
+            height
         );
     }
 }

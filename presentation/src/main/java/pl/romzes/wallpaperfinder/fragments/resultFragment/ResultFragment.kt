@@ -58,7 +58,6 @@ class ResultFragment : Fragment() {
         super.onStart()
         getImagesFromApi()  //--here get image on user request
         //test db
-        context?.let { resultViewModel.saveFavouriteImage(it) }
         context?.let { resultViewModel.getImagesFromDB(it) }
     }
 
@@ -85,7 +84,8 @@ class ResultFragment : Fragment() {
                 ))
             }
             override fun favOnClick(image : ImagePreview) {
-                Log.d(TAG, "testOnClick: favourite was clicked - " + image.description)
+                //save fav image in db //todo can i get context, not context?
+                context?.let { resultViewModel.saveFavouriteImage(it, image ) }
             }
         })
 

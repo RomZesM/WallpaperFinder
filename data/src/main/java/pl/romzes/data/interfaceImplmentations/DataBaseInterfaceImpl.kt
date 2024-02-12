@@ -24,7 +24,7 @@ class DataBaseInterfaceImpl : DataBaseInterface{
     override suspend fun saveImage(context: Context, image: ImagePreview) {
         Log.d(TAG, "saveImage: " + image.imageUrl)
         val db = MyDataBase.initDb(context)
-        val imagePrev : ImagePreviewEntity = ImagePreviewEntity(null, image.imageUrl, image.description)
+        val imagePrev : ImagePreviewEntity = ImagePreviewEntity(null, image.imageId, image.imageUrl, image.description, image.width, image.height)
         db.getDao().insertImage(imagePrev);
     }
 }

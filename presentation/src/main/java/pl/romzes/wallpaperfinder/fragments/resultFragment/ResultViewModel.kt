@@ -53,7 +53,7 @@ class ResultViewModel() : ViewModel() {
            // convertResponse()
             val list = mutableListOf<ImagePreview>()
           unsplashResponse.body()?.results?.forEach {
-            val preview = ImagePreview(1, it.urls.regular, it.altDescription )
+            val preview = ImagePreview(it.id, it.urls.regular, it.altDescription, it.width, it.height )
             list.add(preview)
         }
         imagelist.postValue(list)
@@ -64,17 +64,13 @@ class ResultViewModel() : ViewModel() {
     fun getImagesFromDB(context: Context){
         viewModelScope.launch(Dispatchers.IO){
           val imagelistFav = getImagesFromDBUseCase.getUseCase(context)
-
-            Log.d(TAG, "getImagesFromDB: " + imagelistFav.get(0))
             Log.d(TAG, "getImagesFromDB: " + imagelistFav)
         }
 
     }
 
-    fun saveFavouriteImage(context: Context){
+    fun saveFavouriteImage(context: Context, image: ImagePreview){
         viewModelScope.launch(Dispatchers.IO){
-            val image : ImagePreview = ImagePreview(1, "test url", "test description")
-
             saveFavImageUseCase.execute(context, image)
         }
 
