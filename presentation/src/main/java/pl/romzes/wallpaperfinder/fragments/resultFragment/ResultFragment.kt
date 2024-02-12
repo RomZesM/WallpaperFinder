@@ -59,6 +59,7 @@ class ResultFragment : Fragment() {
         getImagesFromApi()  //--here get image on user request
         //test db
         context?.let { resultViewModel.saveFavouriteImage(it) }
+        context?.let { resultViewModel.getImagesFromDB(it) }
     }
 
     private fun getImagesFromApi() {

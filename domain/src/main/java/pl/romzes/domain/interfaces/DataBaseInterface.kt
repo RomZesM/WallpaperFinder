@@ -5,7 +5,7 @@ import pl.romzes.domain.model.ImagePreview
 
 interface DataBaseInterface {
 
-//    suspend fun getFavouriteImagesList(context: Context): List<ImagePreview>
+    suspend fun getFavouriteImagesList(context: Context): List<ImagePreview>
 
     suspend fun saveImage(context: Context, image: ImagePreview)
 }

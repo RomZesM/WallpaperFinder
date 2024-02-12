@@ -10,11 +10,16 @@ import pl.romzes.domain.model.ImagePreview
 class DataBaseInterfaceImpl : DataBaseInterface{
 
     val TAG  = "rmz"
-//    override suspend fun getFavouriteImagesList(context: Context): List<ImagePreview> {
-//        val db = MyDataBase.initDb(context)
-//        return db.getDao().getAllImageViews()
-//
-//    }
+    override suspend fun getFavouriteImagesList(context: Context): List<ImagePreview> {
+        val db = MyDataBase.initDb(context)
+        val imagePrevEnt = db.getDao().getAllImageViews();
+        val imagePreviewList = mutableListOf<ImagePreview>()
+        imagePrevEnt.forEach {
+            imagePreviewList.add(it.toImageView())
+        }
+        return imagePreviewList
+
+    }
 
     override suspend fun saveImage(context: Context, image: ImagePreview) {
         Log.d(TAG, "saveImage: " + image.imageUrl)

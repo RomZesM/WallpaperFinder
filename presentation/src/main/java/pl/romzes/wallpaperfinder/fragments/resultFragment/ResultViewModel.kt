@@ -61,12 +61,15 @@ class ResultViewModel() : ViewModel() {
         }
     }
 
-//    fun getImagesFromDB(context: Context){
-//        viewModelScope.launch(Dispatchers.IO){
-//          //imagelistFavourite = getImagesFromDBUseCase.getUseCase(context)
-//        }
-//
-//    }
+    fun getImagesFromDB(context: Context){
+        viewModelScope.launch(Dispatchers.IO){
+          val imagelistFav = getImagesFromDBUseCase.getUseCase(context)
+
+            Log.d(TAG, "getImagesFromDB: " + imagelistFav.get(0))
+            Log.d(TAG, "getImagesFromDB: " + imagelistFav)
+        }
+
+    }
 
     fun saveFavouriteImage(context: Context){
         viewModelScope.launch(Dispatchers.IO){

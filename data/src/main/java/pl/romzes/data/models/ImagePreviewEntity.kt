@@ -2,6 +2,7 @@ package pl.romzes.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import pl.romzes.domain.model.ImagePreview
 
 @Entity(tableName = "imagePreviews")
 data class ImagePreviewEntity(
@@ -10,4 +11,13 @@ data class ImagePreviewEntity(
     val url : String,
     val description : String
 
-)
+
+){
+    fun toImageView(): ImagePreview {
+        return ImagePreview(
+            1,
+            url,
+            description
+        );
+    }
+}
