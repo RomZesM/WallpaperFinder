@@ -11,4 +11,8 @@ class GetImagesFromAPIUseCase (private val repoApi : ApiInterface){
     suspend fun  getUseCase(request : String) : Response<UnsplashData>{
         return  repoApi.getImagesFromUnsplashApi(request)
     }
+
+    suspend fun execute(request : String) : List<ImagePreview> {
+        return repoApi.getImagesFromUnsplashApi2(request)
+    }
 }

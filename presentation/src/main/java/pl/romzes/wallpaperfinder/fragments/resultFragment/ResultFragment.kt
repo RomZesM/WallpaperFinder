@@ -45,6 +45,9 @@ class ResultFragment : Fragment() {
         resultViewModel.imagelist.observe(this) {
             initRecyclerView()
         }
+//        resultViewModel.imagelist2.observe(this) {
+//            Log.d(TAG, "onCreateNEW!!!: " + resultViewModel.imagelist2.value)
+//        }
     }
 
      override fun onCreateView(
@@ -68,7 +71,8 @@ class ResultFragment : Fragment() {
         if(userSearchRequest != null){
             request = userSearchRequest as String
         }
-        resultViewModel.getImagesFromApi(request)
+      //  resultViewModel.getImagesFromApi(request)
+        resultViewModel.getImagesFromApi2(request)
     }
 
     //init recyclerView on a fragment

@@ -9,4 +9,5 @@ interface ApiInterface {
 
     suspend fun getImagesFromUnsplashApi(request: String) : Response<UnsplashData>
 
+    suspend fun getImagesFromUnsplashApi2(request: String) : List<ImagePreview>
 }

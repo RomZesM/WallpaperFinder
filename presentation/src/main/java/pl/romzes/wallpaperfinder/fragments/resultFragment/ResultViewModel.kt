@@ -36,6 +36,10 @@ class ResultViewModel() : ViewModel() {
         MutableLiveData<List<ImagePreview>>()
     }
 
+//    val imagelist2 : MutableLiveData<List<ImagePreview>> by lazy{
+//        MutableLiveData<List<ImagePreview>>()
+//    }
+
     val userRequest : MutableLiveData<String> by lazy {
         MutableLiveData<String>()
     }
@@ -57,9 +61,16 @@ class ResultViewModel() : ViewModel() {
             list.add(preview)
         }
         imagelist.postValue(list)
-
         }
     }
+
+    fun getImagesFromApi2(request: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = getImageFromApiUseCase.execute(request)
+            imagelist.postValue(list)
+        }
+    }
+
 
     fun getImagesFromDB(context: Context){
         viewModelScope.launch(Dispatchers.IO){

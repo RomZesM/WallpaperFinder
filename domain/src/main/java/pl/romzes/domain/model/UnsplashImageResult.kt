@@ -10,4 +10,14 @@ data class UnsplashImageResult(
     @SerializedName("alt_description")
     val altDescription: String,
     val urls : ImageUrlList
-)
+){
+    fun toImageView(): ImagePreview {
+        return ImagePreview(
+            id,
+            urls.regular,
+            altDescription,
+            width,
+            height
+        );
+    }
+}
