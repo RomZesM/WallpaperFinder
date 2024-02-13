@@ -1,4 +1,4 @@
-package pl.romzes.domain.model
+package pl.romzes.data.models
 
 data class UnsplashData(
     val total: Int,

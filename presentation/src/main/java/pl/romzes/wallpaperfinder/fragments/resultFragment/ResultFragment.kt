@@ -72,7 +72,7 @@ class ResultFragment : Fragment() {
             request = userSearchRequest as String
         }
       //  resultViewModel.getImagesFromApi(request)
-        resultViewModel.getImagesFromApi2(request)
+        resultViewModel.getImagesFromApi(request)
     }
 
     //init recyclerView on a fragment
