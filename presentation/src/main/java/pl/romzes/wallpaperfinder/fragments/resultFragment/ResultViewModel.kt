@@ -73,7 +73,6 @@ class ResultViewModel() : ViewModel() {
         viewModelScope.launch(Dispatchers.IO){
             saveFavImageUseCase.execute(context, image)
         }
-
     }
 
 

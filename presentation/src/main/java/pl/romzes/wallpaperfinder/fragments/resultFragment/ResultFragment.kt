@@ -90,7 +90,7 @@ class ResultFragment : Fragment() {
             }
         })
 
-         val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view_id) //get the recycler view from fragment
+        val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view_id) //get the recycler view from fragment
         //config recyclerView
         recyclerView?.layoutManager = GridLayoutManager(context, 2) //set options for display elements on view
         recyclerView?.adapter = rvAdapter //attach adapter, we can change different adapters for display info in RV
