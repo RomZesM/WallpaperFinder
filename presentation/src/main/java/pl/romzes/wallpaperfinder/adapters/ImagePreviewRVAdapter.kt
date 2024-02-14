@@ -34,8 +34,8 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
             //insert image by id //todo use glide here
             //binding.imagePreviewId.setImageResource(imagePreview.imageId)
             binding.imageDescriptionId.text = imagePreview.description
-            Log.d("rmz", "bind: " + imagePreview.isFav)
 
+            //check if this image is in fav
             if(imagePreview.isFav){
                 binding.favouriteIconId.setImageResource(R.drawable.icon_heart_black)
                 //use tag to understand what item is it (we can use image id instead tag
