@@ -23,10 +23,6 @@ class ResultViewModel() : ViewModel() {
     private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
 
 
-    //todo -> do not completely understand how it works
-   // val _response = MutableLiveData<Response<UnsplashData>?>()
-  //  val response : LiveData<Response<UnsplashData>?> = _response
-
     val imagelist : MutableLiveData<List<ImagePreview>> by lazy{
         MutableLiveData<List<ImagePreview>>()
     }
@@ -39,11 +35,6 @@ class ResultViewModel() : ViewModel() {
         MutableLiveData<List<ImagePreview>>()
     }
 
-//    val imageListFromApi : MutableLiveData<List<ImagePreview>> by lazy{
-//        MutableLiveData<List<ImagePreview>>()
-//    }
-
-
     fun getImagesFromApi(request: String, context: Context){
         viewModelScope.launch(Dispatchers.IO){
 
@@ -52,6 +43,7 @@ class ResultViewModel() : ViewModel() {
             }
 
             try {
+
                 val listFromApi =  getImageFromApi.await()
                //check if image is in fav DB
                 listFromApi.forEach {
