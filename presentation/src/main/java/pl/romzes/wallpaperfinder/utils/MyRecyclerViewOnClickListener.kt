@@ -7,5 +7,5 @@ interface MyRecyclerViewOnClickListener {
 
     fun onClick(position: Int)
 
-    fun favOnClick(image : ImagePreview)
+    fun favOnClick(image : ImagePreview, position : Int)
 }

@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity(), Connector {
         return super.onOptionsItemSelected(item)
     }
 
-    //todo -test fun, remove later
     fun displayFragment(fragment: Fragment) {
 
         supportFragmentManager.beginTransaction().apply {
@@ -49,7 +48,6 @@ class MainActivity : AppCompatActivity(), Connector {
             addToBackStack(fragment.tag)
             commit()
         }
-
     }
 
 }

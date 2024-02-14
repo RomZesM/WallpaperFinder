@@ -1,7 +1,6 @@
 package pl.romzes.data.interfaceImplmentations
 
 import android.content.Context
-import android.util.Log
 import pl.romzes.data.database.MyDataBase
 import pl.romzes.data.models.ImagePreviewEntity
 import pl.romzes.domain.interfaces.DataBaseInterface
@@ -22,9 +21,14 @@ class DataBaseInterfaceImpl : DataBaseInterface{
     }
 
     override suspend fun saveImage(context: Context, image: ImagePreview) {
-        Log.d(TAG, "saveImage: " + image.imageUrl)
+        //TODO add check if such image is in DB
         val db = MyDataBase.initDb(context)
-        val imagePrev : ImagePreviewEntity = ImagePreviewEntity(null, image.imageId, image.imageUrl, image.description, image.width, image.height)
+        val imagePrev : ImagePreviewEntity = ImagePreviewEntity(null, image.imageUnsplashId, image.imageUrl, image.description, image.width, image.height)
         db.getDao().insertImage(imagePrev);
+    }
+
+    override suspend fun deleteImage(context: Context, image: ImagePreview) {
+        val db = MyDataBase.initDb(context)
+        db.getDao().deleteImage(image.imageUnsplashId)
     }
 }

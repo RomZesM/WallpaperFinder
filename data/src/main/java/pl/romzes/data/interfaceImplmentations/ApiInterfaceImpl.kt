@@ -11,17 +11,6 @@ class ApiInterfaceImpl : ApiInterface {
 
     val TAG  = "rmz"
 
-
-    override fun getImagesFromUnsplashStub(request : String?): List<ImagePreview> {
-        val imageList = listOf<ImagePreview>(
-            ImagePreview("1", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Madagascar.svg/2560px-Flag_of_Madagascar.svg.png", "desсription 01", 0, 0),
-            ImagePreview("1", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Flag_of_Poland.svg/2560px-Flag_of_Poland.svg.png", "desсription 02", 0,0),
-            ImagePreview("1", "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1920px-Flag_of_Denmark.svg.png", "desсription 03", 0 ,0)
-        )
-        Log.d(TAG, "Request from Interface: Implementation: " + request.toString())
-        return imageList
-    }
-
     override suspend fun getImagesFromUnsplashApi(request: String) : List<ImagePreview>{
         val unsplashBaseUrl : String = "https://api.unsplash.com/"
         //todo make in separate file

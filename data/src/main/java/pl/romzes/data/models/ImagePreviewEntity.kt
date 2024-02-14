@@ -16,6 +16,7 @@ data class ImagePreviewEntity(
 ){
     fun toImageView(): ImagePreview {
         return ImagePreview(
+            id,
             unsplashId,
             url,
             description,

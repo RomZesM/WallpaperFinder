@@ -14,6 +14,6 @@ interface ImagePreviewDao {
 
     @Query ("SELECT * FROM imagePreviews")
     suspend fun getAllImageViews() : List<ImagePreviewEntity>
-
-
+    @Query ("DELETE FROM imagePreviews WHERE unsplashId = :unsplashId")
+    suspend fun deleteImage(unsplashId : String)
 }

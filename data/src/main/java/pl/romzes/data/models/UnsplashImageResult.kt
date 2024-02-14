@@ -13,6 +13,7 @@ data class UnsplashImageResult(
 ){
     fun toImageView(): ImagePreview {
         return ImagePreview(
+            null,
             id,
             urls.regular,
             altDescription,

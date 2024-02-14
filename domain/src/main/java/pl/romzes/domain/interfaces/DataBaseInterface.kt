@@ -8,4 +8,6 @@ interface DataBaseInterface {
     suspend fun getFavouriteImagesList(context: Context): List<ImagePreview>
 
     suspend fun saveImage(context: Context, image: ImagePreview)
+
+    suspend fun deleteImage(context: Context, image: ImagePreview)
 }

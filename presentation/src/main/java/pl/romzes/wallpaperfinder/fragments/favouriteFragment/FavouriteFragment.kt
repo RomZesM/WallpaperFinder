@@ -67,9 +67,11 @@ class FavouriteFragment : Fragment() {
 
                 ))
             }
-            override fun favOnClick(image : ImagePreview) {
+            override fun favOnClick(image : ImagePreview, position : Int) {
                 //save fav image in db //todo can i get context, not context?
-                context?.let { viewModel.saveFavouriteImage(it, image ) }
+                context?.let { viewModel.deleteFavImageFromDb(it, image, position) }
+                //refresh recycler view
+                viewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it.toList()) }
             }
         })
 

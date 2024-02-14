@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import pl.romzes.data.interfaceImplmentations.ApiInterfaceImpl
 import pl.romzes.data.interfaceImplmentations.DataBaseInterfaceImpl
 import pl.romzes.domain.model.ImagePreview
+import pl.romzes.domain.usecases.DeleteFavImageUseCase
 import pl.romzes.domain.usecases.GetImagesFromAPIUseCase
 import pl.romzes.domain.usecases.GetImagesFromDBUseCase
 import pl.romzes.domain.usecases.SaveFavImageUseCase
@@ -21,6 +22,7 @@ class ResultViewModel() : ViewModel() {
     private val getImageFromApiUseCase = GetImagesFromAPIUseCase(ApiInterfaceImpl())
     private val getImagesFromDBUseCase = GetImagesFromDBUseCase(DataBaseInterfaceImpl())
     private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
+    private val deleteFavImageUseCase = DeleteFavImageUseCase(DataBaseInterfaceImpl())
 
 
     val imagelist : MutableLiveData<List<ImagePreview>> by lazy{
@@ -61,7 +63,7 @@ class ResultViewModel() : ViewModel() {
 
     fun isInFavourite(image: ImagePreview) : Boolean{
         imagelistFavourite.value?.forEach{
-            if(image.imageId == it.imageId)
+            if(image.imageUnsplashId == it.imageUnsplashId)
                 return true
         }
         return false
@@ -79,6 +81,12 @@ class ResultViewModel() : ViewModel() {
     fun saveFavouriteImage(context: Context, image: ImagePreview){
         viewModelScope.launch(Dispatchers.IO){
             saveFavImageUseCase.execute(context, image)
+        }
+    }
+
+    fun deleteFavouriteImage(context: Context, image: ImagePreview){
+        viewModelScope.launch(Dispatchers.IO){
+            deleteFavImageUseCase.execute(context, image)
         }
     }
 
