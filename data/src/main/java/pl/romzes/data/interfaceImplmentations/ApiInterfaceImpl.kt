@@ -11,6 +11,7 @@ class ApiInterfaceImpl : ApiInterface {
 
     val TAG  = "rmz"
 
+
     override fun getImagesFromUnsplashStub(request : String?): List<ImagePreview> {
         val imageList = listOf<ImagePreview>(
             ImagePreview("1", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Madagascar.svg/2560px-Flag_of_Madagascar.svg.png", "desсription 01", 0, 0),
