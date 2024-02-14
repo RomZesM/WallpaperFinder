@@ -35,6 +35,7 @@ class ResultFragment : Fragment() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //get search request from previous activity through  ARGUMENTS
@@ -46,7 +47,6 @@ class ResultFragment : Fragment() {
             getImagesFromApi()
        }
         resultViewModel.imagelist.observe(this) {
-           // Log.d(TAG, "List With Favs: " + resultViewModel.imagelist.value)
             initRecyclerView()
         }
 
@@ -56,6 +56,8 @@ class ResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
      ): View? {
+
+         (requireActivity() as MainActivity).showUpButton(true);
        // Inflate the layout for this fragment
      return inflater.inflate(R.layout.fragment_search_result, container, false)
     }
