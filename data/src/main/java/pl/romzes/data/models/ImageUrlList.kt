@@ -1,4 +1,4 @@
-package pl.romzes.domain.model
+package pl.romzes.data.models
 
 import com.google.gson.annotations.SerializedName
 

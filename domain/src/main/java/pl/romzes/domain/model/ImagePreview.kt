@@ -7,5 +7,6 @@ data class ImagePreview (
     val imageUrl : String,
     val description : String,
     val width: Int,
-    val height : Int
+    val height : Int,
+    var isFav : Boolean = false
 ) : Serializable

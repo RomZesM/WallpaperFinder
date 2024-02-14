@@ -42,9 +42,14 @@ class ResultFragment : Fragment() {
         //Change text in toolbox
         activity?.findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.result_fragment)
 
+        resultViewModel.imagelistFavourite.observe(this) {
+            getImagesFromApi()
+       }
         resultViewModel.imagelist.observe(this) {
+           // Log.d(TAG, "List With Favs: " + resultViewModel.imagelist.value)
             initRecyclerView()
         }
+
     }
 
      override fun onCreateView(
@@ -57,9 +62,11 @@ class ResultFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        getImagesFromApi()  //--here get image on user request
-        //test db
+
+        //first get the imageListFrom DB
         context?.let { resultViewModel.getImagesFromDB(it) }
+        //getImagesFromApi()  //--here get image on user request
+
     }
 
     private fun getImagesFromApi() {
@@ -68,7 +75,7 @@ class ResultFragment : Fragment() {
         if(userSearchRequest != null){
             request = userSearchRequest as String
         }
-        resultViewModel.getImagesFromApi(request)
+        context?.let { resultViewModel.getImagesFromApi(request, it) }
     }
 
     //init recyclerView on a fragment
