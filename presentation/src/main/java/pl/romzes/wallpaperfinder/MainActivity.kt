@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
 import pl.romzes.wallpaperfinder.fragments.favouriteFragment.FavouriteFragment
 import pl.romzes.wallpaperfinder.fragments.searchFragment.SearchFieldFragment
@@ -17,6 +18,8 @@ class MainActivity : AppCompatActivity(), Connector {
     val TAG = "rmz"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
+
         setContentView(R.layout.activity_main)
         //init toolbar
         val toolbar : Toolbar = findViewById(R.id.toolbar_id)
