@@ -43,6 +43,8 @@ class SearchFieldFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonInit()
+        //show back button
+        (requireActivity() as MainActivity).showUpButton(false);
     }
 
     override fun onStart() {

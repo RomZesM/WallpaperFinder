@@ -41,12 +41,12 @@ class FavouriteFragment : Fragment() {
         viewModel.imagelist.observe(viewLifecycleOwner) {
           initRecyclerView()
         }
+        //show bask button only in fragment
+        (requireActivity() as MainActivity).showUpButton(true);
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
     }
 
     override fun onStart() {

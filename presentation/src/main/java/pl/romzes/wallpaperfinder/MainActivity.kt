@@ -1,17 +1,15 @@
 package pl.romzes.wallpaperfinder
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import pl.romzes.wallpaperfinder.fragments.favouriteFragment.FavouriteFragment
-import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragment
 import pl.romzes.wallpaperfinder.fragments.searchFragment.SearchFieldFragment
-
-
 import pl.romzes.wallpapers.utils.Connector
 
 class MainActivity : AppCompatActivity(), Connector {
@@ -25,6 +23,16 @@ class MainActivity : AppCompatActivity(), Connector {
         setSupportActionBar(toolbar)
 
         displayFragment(SearchFieldFragment())
+    }
+
+    //turnOn/Off the Up Arrow
+    fun showUpButton(state : Boolean){
+       supportActionBar?.setDisplayHomeAsUpEnabled(state)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+       // onBackPressed()
+       onBackPressedDispatcher.onBackPressed()
+        return true
     }
 
     //add menu to ActionBar

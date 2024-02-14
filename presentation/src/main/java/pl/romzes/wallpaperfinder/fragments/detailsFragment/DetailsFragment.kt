@@ -54,6 +54,10 @@ class DetailsFragment : Fragment(), Connector {
         val imageDescField  = requireView().findViewById<TextView>(R.id.detail_description_id)
         imageUrl?.let { imageView.getImageFromURL(requireActivity() as MainActivity, it) }
         imageDescField.text = imageDescription
+
+        //show back button
+        (requireActivity() as MainActivity).showUpButton(true);
+
     }
 
 
