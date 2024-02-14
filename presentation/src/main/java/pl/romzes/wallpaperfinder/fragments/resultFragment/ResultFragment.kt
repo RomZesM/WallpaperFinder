@@ -41,7 +41,7 @@ class ResultFragment : Fragment() {
         userSearchRequest = arguments?.getString("userRequest")
         //Change text in toolbox
         activity?.findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.result_fragment)
-
+        //TODO remakW THIS CHAIN use ASYNC instead
         resultViewModel.imagelistFavourite.observe(this) {
             getImagesFromApi()
        }
@@ -88,12 +88,31 @@ class ResultFragment : Fragment() {
                 (requireActivity() as MainActivity).displayFragment(DetailsFragment.newInstance(
                     imageUrl = resultViewModel.imagelist.value?.get(position)?.imageUrl.toString(),
                     imageDescription = resultViewModel.imagelist.value?.get(position)?.description.toString()
-
                 ))
             }
-            override fun favOnClick(image : ImagePreview) {
+            //onclick listener for heart in RV
+            override fun favOnClick(image : ImagePreview, position : Int) {
                 //save fav image in db //todo can i get context, not context?
-                context?.let { resultViewModel.saveFavouriteImage(it, image ) }
+                if(!image.isFav){
+                    context?.let { resultViewModel.saveFavouriteImage(it, image ) }
+                    resultViewModel.imagelist.value?.get(position)?.isFav = true;
+                    resultViewModel.imagelist.value?.let {
+                        rvAdapter.setImagePreviewIntoRecyclerView(
+                            it
+                        )
+                    }
+                }
+                else{
+                    context?.let { resultViewModel.deleteFavouriteImage(it, image ) }
+                    //change fav status and re-display RV
+                    resultViewModel.imagelist.value?.get(position)?.isFav = false;
+                    resultViewModel.imagelist.value?.let {
+                        rvAdapter.setImagePreviewIntoRecyclerView(
+                            it
+                        )
+                    }
+                }
+
             }
         })
 

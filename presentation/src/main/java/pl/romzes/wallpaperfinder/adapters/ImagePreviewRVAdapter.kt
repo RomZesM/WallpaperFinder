@@ -41,6 +41,10 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
                 //use tag to understand what item is it (we can use image id instead tag
                 binding.favouriteIconId.tag = "black"
             }
+            else  if(!imagePreview.isFav){
+               binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty)
+               binding.favouriteIconId.tag = "empty"
+            }
 
         }
     }
@@ -67,23 +71,11 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
                 myRecyclerViewOnClickListener!!.onClick(position)
             }
         }
+
         holder.binding.favouriteIconId.setOnClickListener{
             if (myRecyclerViewOnClickListener != null) {
-                myRecyclerViewOnClickListener!!.favOnClick(imagePrewList[position])
+                myRecyclerViewOnClickListener!!.favOnClick(imagePrewList[position], position)
             }
-
-            //change icon after click
-            if (holder.binding.favouriteIconId.tag == null || holder.binding.favouriteIconId.tag == "empty"){
-                holder.binding.favouriteIconId.setImageResource(R.drawable.icon_heart_black)
-                //use tag to understand what item is it (we can use image id instead tag
-                holder.binding.favouriteIconId.tag = "black"
-            }
-            else {
-                holder.binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty)
-                holder.binding.favouriteIconId.tag = "empty"
-            }
-
-
         }
 
         Glide.with(fragment)
