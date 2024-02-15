@@ -56,8 +56,9 @@ class SearchFieldFragment : Fragment() {
         val button : Button? = view?.findViewById(R.id.search_wall_button_id)
         val textField : EditText?  = view?.findViewById(R.id.query_field_id)
 
+        //todo add message, that only english is able for API
         button?.setOnClickListener(View.OnClickListener {
-          (requireActivity() as MainActivity).displayFragment(ResultFragment.newInstance(
+            (requireActivity() as MainActivity).displayFragment(ResultFragment.newInstance(
                 request = textField?.text.toString()
             ))
         })

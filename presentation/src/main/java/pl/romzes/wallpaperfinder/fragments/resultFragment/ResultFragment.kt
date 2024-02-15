@@ -49,13 +49,11 @@ class ResultFragment : Fragment() {
         //TODO remake THIS CHAIN use ASYNC instead
         resultViewModel.imagelistFavourite.observe(this) {
             getImagesFromApi()
-       }
+        }
         resultViewModel.imagelist.observe(this) {
             initRecyclerView()
         }
-
         resultViewModel.error.observe(this){
-
             showErrorMessage(resultViewModel.error.value)
         }
 
@@ -78,7 +76,6 @@ class ResultFragment : Fragment() {
              getImagesFromApi()
          }
 
-       // Inflate the layout for this fragment
      return inflatedView
     }
 
@@ -94,6 +91,7 @@ class ResultFragment : Fragment() {
     private fun getImagesFromApi() {
        //todo do not load pages from api, need to use saved list
         var request = "random"
+
         if(userSearchRequest != null){
             request = userSearchRequest as String
         }
