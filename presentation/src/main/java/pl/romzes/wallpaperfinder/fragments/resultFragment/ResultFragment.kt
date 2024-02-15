@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -53,9 +54,14 @@ class ResultFragment : Fragment() {
             initRecyclerView()
         }
 
+        resultViewModel.error.observe(this){
+
+            showErrorMessage(resultViewModel.error.value)
+        }
+
     }
 
-     override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
      ): View? {
@@ -138,5 +144,14 @@ class ResultFragment : Fragment() {
         recyclerView?.adapter = rvAdapter //attach adapter, we can change different adapters for display info in RV
         resultViewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it)
         }
+    }
+
+    //show text field with error message if no images was found
+    private fun showErrorMessage(message : String?){
+        val errorTextView = view?.findViewById<TextView>(R.id.error_text_field_id)
+        if(message != null){
+            errorTextView?.text = message;
+        }
+        errorTextView?.visibility = View.VISIBLE
     }
 }

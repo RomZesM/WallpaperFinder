@@ -2,6 +2,7 @@ package pl.romzes.data.interfaceImplmentations
 
 import UnsplashApi
 import android.util.Log
+import org.json.JSONObject
 import pl.romzes.domain.model.ImagePreview
 import pl.romzes.domain.interfaces.ApiInterface
 import retrofit2.Retrofit
@@ -24,11 +25,20 @@ class ApiInterfaceImpl : ApiInterface {
         //dynamic request - photos?query=autumn&per_page=30&orientation=landscape&client_id=Abed2b9A8CYciNLGC3Ilzfwkw9Lh4-aINn6yKl7ZOxc
         var response = api.searchImageWithParams(request, "30", "landscape", "Abed2b9A8CYciNLGC3Ilzfwkw9Lh4-aINn6yKl7ZOxc").execute()
         var imagePreviewsList = mutableListOf<ImagePreview>()
-        response.body()?.results?.forEach {
-            val imagePreview = it.toImageView()
-            imagePreviewsList.add(imagePreview)
+        if (response.isSuccessful){
+            response.body()?.results?.forEach {
+                val imagePreview = it.toImageView()
+                imagePreviewsList.add(imagePreview)
+            }
         }
-        Log.d(TAG, "getImagesFromUnsplashApi: " + response.isSuccessful + response.message() )
+        else {
+            Log.e(TAG, "getImagesFromUnsplashApi: couldn't receive data from unsplash api", )
+        }
+       
+       
+        
+        Log.d(TAG, "getImagesFromUnsplashApi: isSuccess - " + response.isSuccessful )
+        Log.d(TAG, "getImagesFromUnsplashApi: body - " + response.body() )
         return imagePreviewsList
     }
 
