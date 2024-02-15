@@ -50,7 +50,6 @@ class ResultViewModel() : ViewModel() {
             try {
                 val listFromApi =  getImageFromApi.await()
                //check if image is in fav DB
-                Log.d(TAG, "list : " + listFromApi.size)
                 if(listFromApi.size > 0){
                     listFromApi.forEach {
                         if(isInFavourite(it)){
@@ -64,11 +63,9 @@ class ResultViewModel() : ViewModel() {
                }
 
             } catch (e: Exception) {
-                Log.d(TAG, "getImagesFromApi: " + e.message)
-                Log.e(TAG, "getImagesFromApi: couldn't receive images from Unsplash API")
-
-
-         }
+               Log.d(TAG, "getImagesFromApi: " + e.message)
+               error.postValue(e.message)
+            }
        }
     }
 

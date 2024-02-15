@@ -33,12 +33,10 @@ class ApiInterfaceImpl : ApiInterface {
         }
         else {
             Log.e(TAG, "getImagesFromUnsplashApi: couldn't receive data from unsplash api", )
+            throw Exception("Sorry, connection problem, try again later")
         }
-       
-       
-        
-        Log.d(TAG, "getImagesFromUnsplashApi: isSuccess - " + response.isSuccessful )
-        Log.d(TAG, "getImagesFromUnsplashApi: body - " + response.body() )
+//        Log.d(TAG, "getImagesFromUnsplashApi: isSuccess - " + response.isSuccessful )
+//        Log.d(TAG, "getImagesFromUnsplashApi: body - " + response.body() )
         return imagePreviewsList
     }
 
