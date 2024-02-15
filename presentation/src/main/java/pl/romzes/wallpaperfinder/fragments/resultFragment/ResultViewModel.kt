@@ -37,27 +37,35 @@ class ResultViewModel() : ViewModel() {
         MutableLiveData<List<ImagePreview>>()
     }
 
+    val error : MutableLiveData<String> by lazy{
+        MutableLiveData<String>()
+    }
+
     fun getImagesFromApi(request: String, context: Context){
         viewModelScope.launch(Dispatchers.IO){
 
             val getImageFromApi = viewModelScope.async (Dispatchers.IO) {
                 getImageFromApiUseCase.execute(request)
             }
-
             try {
-
                 val listFromApi =  getImageFromApi.await()
                //check if image is in fav DB
-                listFromApi.forEach {
-                   if(isInFavourite(it)){
-                       it.isFav = true;
-                   }
-                imagelist.postValue(listFromApi)
-             }
+                if(listFromApi.size > 0){
+                    listFromApi.forEach {
+                        if(isInFavourite(it)){
+                            it.isFav = true;
+                        }
+                        imagelist.postValue(listFromApi)
+                    }
+                }
+               else{
+                   error.postValue("Nothing was found for your query, please change your query and try again")
+               }
 
             } catch (e: Exception) {
-                Log.e(TAG, "getImagesFromApi: couldn't receive images from DB", )
-         }
+               Log.d(TAG, "getImagesFromApi: " + e.message)
+               error.postValue(e.message)
+            }
        }
     }
 
