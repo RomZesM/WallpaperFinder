@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), Connector {
     val TAG = "rmz"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Thread.sleep(3000) - make animation longer
         installSplashScreen()
 
         setContentView(R.layout.activity_main)
