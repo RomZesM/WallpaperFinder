@@ -53,7 +53,7 @@ class FavouriteFragment : Fragment() {
         super.onStart()
         context?.let { viewModel.getImagesFromDB(it) }
     }
-    //todo make separaate function for both fragment as util - refactor
+    //todo make separate function for both fragment as util - refactor
     private fun initRecyclerView() {
         //set myonclickFunction in adapter
         rvAdapter.setMyOnclickListener(object : MyRecyclerViewOnClickListener {
