@@ -28,6 +28,7 @@ class ApiInterfaceImpl : ApiInterface {
             val imagePreview = it.toImageView()
             imagePreviewsList.add(imagePreview)
         }
+        Log.d(TAG, "getImagesFromUnsplashApi: " + response.isSuccessful + response.message() )
         return imagePreviewsList
     }
 
