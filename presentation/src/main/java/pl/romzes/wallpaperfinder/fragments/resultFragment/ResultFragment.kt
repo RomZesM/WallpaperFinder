@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import pl.romzes.domain.model.ImagePreview
 import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
@@ -42,7 +43,9 @@ class ResultFragment : Fragment() {
         userSearchRequest = arguments?.getString("userRequest")
         //Change text in toolbox
         activity?.findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.result_fragment)
-        //TODO remakW THIS CHAIN use ASYNC instead
+
+
+        //TODO remake THIS CHAIN use ASYNC instead
         resultViewModel.imagelistFavourite.observe(this) {
             getImagesFromApi()
        }
@@ -56,10 +59,21 @@ class ResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
      ): View? {
-
+            //show UP button in ActionBar
          (requireActivity() as MainActivity).showUpButton(true);
+        //need to inflate first, to get a swipeToRefreshLayout
+        val inflatedView = inflater.inflate(R.layout.fragment_search_result, container, false)
+
+         //init refresh by swipe
+        val swipeToRefresh = inflatedView.findViewById<SwipeRefreshLayout>(R.id.search_results_swipe_id)
+
+         swipeToRefresh?.setOnRefreshListener {
+             swipeToRefresh.isRefreshing = false;
+             getImagesFromApi()
+         }
+
        // Inflate the layout for this fragment
-     return inflater.inflate(R.layout.fragment_search_result, container, false)
+     return inflatedView
     }
 
     override fun onStart() {
@@ -82,7 +96,7 @@ class ResultFragment : Fragment() {
 
     //init recyclerView on a fragment
     private fun initRecyclerView() {
-       //set myonclickFunction in adapter
+       //set myOnclickFunction in adapter
         rvAdapter.setMyOnclickListener(object : MyRecyclerViewOnClickListener{
            //on click we open new fragment with parameters of images
             //todo add some more parameters
