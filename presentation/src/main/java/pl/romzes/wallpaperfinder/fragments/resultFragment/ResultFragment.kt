@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
@@ -52,9 +53,11 @@ class ResultFragment : Fragment() {
         }
         resultViewModel.imagelist.observe(this) {
             initRecyclerView()
+            hideProgressBar()
         }
         resultViewModel.error.observe(this){
             showErrorMessage(resultViewModel.error.value)
+            hideProgressBar()
         }
 
     }
@@ -151,5 +154,10 @@ class ResultFragment : Fragment() {
             errorTextView?.text = message;
         }
         errorTextView?.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar(){
+        val progressBar = view?.findViewById<ProgressBar>(R.id.progressBar_rv_id)
+        progressBar?.visibility = View.GONE
     }
 }
