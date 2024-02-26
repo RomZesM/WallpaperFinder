@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -28,9 +29,7 @@ class ResultFragment : Fragment() {
     private val rvAdapter = ImagePreviewRVAdapter(this)
     private var userSearchRequest : String? = null
 
-    //add a ViewModel,
-    private val resultViewModel : ResultViewModel by viewModels<ResultViewModel>()
-
+    lateinit private var resultViewModel : ResultViewModel
 
     companion object {
         fun newInstance(request: String) = ResultFragment().apply {
@@ -38,9 +37,11 @@ class ResultFragment : Fragment() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //init viwModel with customFabric
+        resultViewModel = ViewModelProvider(this, ResultFragmentViewModelFactory()).get(ResultViewModel::class.java)
+
         //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")
         //Change text in toolbox
