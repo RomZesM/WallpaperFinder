@@ -6,4 +6,5 @@
     <string name="favourite_menu_name">Favourite</string>
     <string name="result_fragment">Search result</string>
     <string name="no_result_for_query">There is no such images on Unsplash.com</string>
+    <string name="button_search">Search</string>
 </resources>

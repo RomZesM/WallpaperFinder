@@ -25,8 +25,10 @@ class MainActivity : AppCompatActivity(), Connector {
         //init toolbar
         val toolbar : Toolbar = findViewById(R.id.toolbar_id)
         setSupportActionBar(toolbar)
+        if(savedInstanceState == null){
+            displayFragment(SearchFieldFragment())
+        }
 
-        displayFragment(SearchFieldFragment())
     }
 
     //turnOn/Off the Up Arrow

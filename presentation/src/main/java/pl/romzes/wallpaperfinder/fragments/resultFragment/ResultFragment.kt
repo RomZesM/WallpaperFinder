@@ -85,7 +85,7 @@ class ResultFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //first get the imageListFrom DB
+        //first get the imageListFrom DB  //todo why do i need a context here?
         context?.let { resultViewModel.getImagesFromDB(it) }
         //getImagesFromApi()  //--here get image on user request
 
