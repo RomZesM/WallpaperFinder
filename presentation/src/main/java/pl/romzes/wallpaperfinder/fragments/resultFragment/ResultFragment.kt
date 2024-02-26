@@ -1,7 +1,6 @@
 package pl.romzes.wallpaperfinder.fragments.resultFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +17,10 @@ import pl.romzes.domain.model.ImagePreview
 import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
+import pl.romzes.wallpaperfinder.app.App
 import pl.romzes.wallpaperfinder.fragments.detailsFragment.DetailsFragment
 import pl.romzes.wallpaperfinder.utils.MyRecyclerViewOnClickListener
+import javax.inject.Inject
 
 
 class ResultFragment : Fragment() {
@@ -29,7 +29,10 @@ class ResultFragment : Fragment() {
     private val rvAdapter = ImagePreviewRVAdapter(this)
     private var userSearchRequest : String? = null
 
-    lateinit private var resultViewModel : ResultViewModel
+    @Inject
+    lateinit var resultFragmentVMFactory : ResultFragmentViewModelFactory
+
+    private lateinit var resultViewModel : ResultViewModel
 
     companion object {
         fun newInstance(request: String) = ResultFragment().apply {
@@ -39,8 +42,12 @@ class ResultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //init viwModel with customFabric
-        resultViewModel = ViewModelProvider(this, ResultFragmentViewModelFactory()).get(ResultViewModel::class.java)
+        //makeInjection?? from App
+        (activity?.applicationContext as App).appComponent.inject(this)
+
+
+        //init viwModel with customFaсtory
+        resultViewModel = ViewModelProvider(this, resultFragmentVMFactory).get(ResultViewModel::class.java)
 
         //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")

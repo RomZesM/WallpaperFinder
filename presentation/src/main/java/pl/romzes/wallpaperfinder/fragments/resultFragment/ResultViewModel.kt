@@ -68,7 +68,7 @@ class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCas
        }
     }
 
-    fun isInFavourite(image: ImagePreview) : Boolean{
+   private fun isInFavourite(image: ImagePreview) : Boolean{
         imagelistFavourite.value?.forEach{
             if(image.imageUnsplashId == it.imageUnsplashId)
                 return true
@@ -100,8 +100,8 @@ class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCas
         userRequest.value = msg;
     }
 
-    fun getUserRequest() : String {
-        return userRequest.value.toString()
-    }
+//    fun getUserRequest() : String {
+//        return userRequest.value.toString()
+//    }
 
 }
