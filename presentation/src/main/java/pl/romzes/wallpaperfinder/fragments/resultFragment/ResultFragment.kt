@@ -53,8 +53,7 @@ class ResultFragment : Fragment() {
 
         //get search request from previous activity through  ARGUMENTS
         userSearchRequest = arguments?.getString("userRequest")
-        //Change text in toolbox
-        activity?.findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.result_fragment)
+
 
 
         //TODO remake THIS CHAIN use ASYNC instead
@@ -76,6 +75,9 @@ class ResultFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
      ): View? {
+
+        //Change text in toolbox
+        (requireActivity() as MainActivity).findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.result_fragment)
             //show UP button in ActionBar
          (requireActivity() as MainActivity).showUpButton(true);
         //need to inflate first, to get a swipeToRefreshLayout

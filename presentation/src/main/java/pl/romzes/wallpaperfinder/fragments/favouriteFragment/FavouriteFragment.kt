@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,17 +49,13 @@ class FavouriteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_favourite, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+        //Change text in toolbox
+        (requireActivity() as MainActivity).findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.favourite_fragment)
         //show bask button only in fragment
         (requireActivity() as MainActivity).showUpButton(true);
+
+        return inflater.inflate(R.layout.fragment_favourite, container, false)
     }
-
-
 
     override fun onStart() {
         super.onStart()
