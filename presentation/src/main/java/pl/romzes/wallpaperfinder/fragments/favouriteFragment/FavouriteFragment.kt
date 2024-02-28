@@ -37,7 +37,7 @@ class FavouriteFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //daggerinjection for activity
+        //dagger injection for activity
         (activity?.applicationContext as App).appComponent.inject(this)
 
         viewModel = ViewModelProvider(this, favouriteViewModelFactory).get(FavouriteViewModel::class.java)
@@ -52,7 +52,6 @@ class FavouriteFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
 
         //show bask button only in fragment
         (requireActivity() as MainActivity).showUpButton(true);
@@ -70,6 +69,7 @@ class FavouriteFragment : Fragment() {
         }
 
     }
+
     //todo make separate function for both fragment as util - refactor
     private fun initRecyclerView() {
         //set myonclickFunction in adapter

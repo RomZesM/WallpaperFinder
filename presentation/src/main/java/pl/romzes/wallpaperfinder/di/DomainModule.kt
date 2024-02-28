@@ -22,7 +22,6 @@ class DomainModule {
       return  GetImagesFromDBUseCase(interfaceImpl)
     }
 
-
     @Provides
     fun provideSaveFavImageUseCase(interfaceImpl: DataBaseInterfaceImpl) : SaveFavImageUseCase {
      return SaveFavImageUseCase(interfaceImpl)

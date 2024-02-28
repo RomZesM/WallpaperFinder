@@ -11,7 +11,6 @@ class FavouriteViewModelFactory(private val getImagesFromDBUseCase : GetImagesFr
                                 private val saveFavImageUseCase : SaveFavImageUseCase,
                                 private val deleteFavImageUseCase : DeleteFavImageUseCase) : ViewModelProvider.Factory {
 
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
         return FavouriteViewModel(getImagesFromDBUseCase,

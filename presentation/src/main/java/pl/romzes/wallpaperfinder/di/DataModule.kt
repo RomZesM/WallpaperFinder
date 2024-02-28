@@ -11,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class DataModule {
 
-
     private val retrofit : Retrofit by lazy{
            // val unsplashBaseUrl : String = "https://api.unsplash.com/"
     Retrofit.Builder()
@@ -25,7 +24,6 @@ class DataModule {
     fun  provideUnsplashApi() : UnsplashApi {
         return  retrofit.create(UnsplashApi::class.java)
     }
-
 
     @Provides
     fun providesDataBaseInterfaceImpl() : DataBaseInterfaceImpl{

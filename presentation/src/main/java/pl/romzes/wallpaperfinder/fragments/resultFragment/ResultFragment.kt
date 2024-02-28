@@ -45,7 +45,6 @@ class ResultFragment : Fragment() {
         //makeInjection?? from App for all fields with @inject annotation
         (activity?.applicationContext as App).appComponent.inject(this)
 
-
         //init viwModel with customFaсtory
         resultViewModel = ViewModelProvider(this, resultFragmentVMFactory).get(ResultViewModel::class.java)
 

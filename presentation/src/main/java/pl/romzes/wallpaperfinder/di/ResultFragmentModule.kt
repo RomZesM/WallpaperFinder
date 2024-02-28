@@ -12,9 +12,6 @@ import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragmentViewMode
 @Module
 class ResultFragmentModule {
 
-//    fun provideRVAdapter() : ImagePreviewRVAdapter {
-//        return ImagePreviewRVAdapter(this)
-//    }
     @Provides
     fun provideResultFragmentVMFactory(getImagesFromAPIUseCase: GetImagesFromAPIUseCase,
                                        getImagesFromDBUseCase: GetImagesFromDBUseCase,

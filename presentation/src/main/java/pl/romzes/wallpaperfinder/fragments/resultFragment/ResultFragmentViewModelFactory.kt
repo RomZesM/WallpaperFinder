@@ -16,11 +16,6 @@ class ResultFragmentViewModelFactory(
     private val saveFavImageUseCase : SaveFavImageUseCase,
     private val deleteFavImageUseCase: DeleteFavImageUseCase) : ViewModelProvider.Factory {
 
-//    private val getImageFromApiUseCase = GetImagesFromAPIUseCase(ApiInterfaceImpl())
-//    private val getImagesFromDBUseCase = GetImagesFromDBUseCase(DataBaseInterfaceImpl())
-//    private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
-//    private val deleteFavImageUseCase = DeleteFavImageUseCase(DataBaseInterfaceImpl())
-
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
         return ResultViewModel(getImagesFromAPIUseCase,

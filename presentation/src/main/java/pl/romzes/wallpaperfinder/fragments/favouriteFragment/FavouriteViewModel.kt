@@ -18,21 +18,13 @@ class FavouriteViewModel(private val getImagesFromDBUseCase : GetImagesFromDBUse
                          private val saveFavImageUseCase : SaveFavImageUseCase,
                          private val deleteFavImageUseCase : DeleteFavImageUseCase) : ViewModel() {
     val TAG = "rmz"
-//    private val getImagesFromDBUseCase = GetImagesFromDBUseCase(DataBaseInterfaceImpl())
-//    private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
-//    private val deleteFavImageUseCase = DeleteFavImageUseCase(DataBaseInterfaceImpl())
-
-
 
     val imagelist : MutableLiveData<MutableList<ImagePreview>> = MutableLiveData<MutableList<ImagePreview>>()
-
 
     fun getImagesFromDB(context: Context){
         viewModelScope.launch(Dispatchers.IO){
             val imageListFromDb = getImagesFromDBUseCase.getUseCase(context)
             imagelist.postValue(imageListFromDb.toMutableList())
-
-
         }
     }
     fun saveFavouriteImage(context: Context, image: ImagePreview){
