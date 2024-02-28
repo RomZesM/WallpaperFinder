@@ -8,18 +8,21 @@ import pl.romzes.domain.interfaces.ApiInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiInterfaceImpl : ApiInterface {
+class ApiInterfaceImpl (retrofit: Retrofit) : ApiInterface {
 
     val TAG  = "rmz"
 
+//    val unsplashBaseUrl : String = "https://api.unsplash.com/"
+//    private val api : UnsplashApi = Retrofit.Builder()
+//        .baseUrl(unsplashBaseUrl)
+//        .addConverterFactory(GsonConverterFactory.create()) //create converter from json into data object
+//        .build() //build request
+//        .create(UnsplashApi::class.java)
+
+        private val api : UnsplashApi = retrofit.create(UnsplashApi::class.java)
+
+
     override suspend fun getImagesFromUnsplashApi(request: String) : List<ImagePreview>{
-        val unsplashBaseUrl : String = "https://api.unsplash.com/"
-        //todo make in separate file
-        val api = Retrofit.Builder()
-            .baseUrl(unsplashBaseUrl)
-            .addConverterFactory(GsonConverterFactory.create()) //create converter from json into data object
-            .build() //build request
-            .create(UnsplashApi::class.java) //in my api class i need to realize api endpoints
 
         //val response = api.searchImage().execute();
         //dynamic request - photos?query=autumn&per_page=30&orientation=landscape&client_id=Abed2b9A8CYciNLGC3Ilzfwkw9Lh4-aINn6yKl7ZOxc
