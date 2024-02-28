@@ -11,25 +11,29 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
+import pl.romzes.wallpaperfinder.fragments.detailsFragment.DetailsViewModel
 import pl.romzes.wallpaperfinder.fragments.resultFragment.ResultFragment
 import pl.romzes.wallpapers.utils.Connector
 
 
 class SearchFieldFragment : Fragment() {
 
+
     val TAG = "rmz"
-    var connector : Connector? = null
+
+    lateinit var viewModel : ViewModel;
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        this.connector = context as Connector // todo remove after all, this is alternative way
-                                                //to communicate between activities
     }
 
     override fun onCreateView(
@@ -42,6 +46,7 @@ class SearchFieldFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         buttonInit()
         //show back button
         (requireActivity() as MainActivity).showUpButton(false);
@@ -61,6 +66,9 @@ class SearchFieldFragment : Fragment() {
             (requireActivity() as MainActivity).displayFragment(ResultFragment.newInstance(
                 request = textField?.text.toString()
             ))
+
         })
     }
+
+
 }

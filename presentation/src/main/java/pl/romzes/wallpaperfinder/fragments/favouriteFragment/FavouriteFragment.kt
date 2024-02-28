@@ -14,8 +14,10 @@ import pl.romzes.domain.model.ImagePreview
 import pl.romzes.wallpaperfinder.MainActivity
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.adapters.ImagePreviewRVAdapter
+import pl.romzes.wallpaperfinder.app.App
 import pl.romzes.wallpaperfinder.fragments.detailsFragment.DetailsFragment
 import pl.romzes.wallpaperfinder.utils.MyRecyclerViewOnClickListener
+import javax.inject.Inject
 
 class FavouriteFragment : Fragment() {
 
@@ -24,8 +26,22 @@ class FavouriteFragment : Fragment() {
     }
 
     val TAG = "rmz"//todo !del
+
+    @Inject
+    lateinit var favouriteViewModelFactory : FavouriteViewModelFactory
+
     private lateinit var viewModel: FavouriteViewModel
+
     private val rvAdapter = ImagePreviewRVAdapter(this)
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //dagger injection for activity
+        (activity?.applicationContext as App).appComponent.inject(this)
+
+        viewModel = ViewModelProvider(this, favouriteViewModelFactory).get(FavouriteViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,23 +52,24 @@ class FavouriteFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FavouriteViewModel::class.java)
-        // TODO: Use the ViewModel
-        viewModel.imagelist.observe(viewLifecycleOwner) {
-          initRecyclerView()
-        }
+
         //show bask button only in fragment
         (requireActivity() as MainActivity).showUpButton(true);
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onStart() {
         super.onStart()
         context?.let { viewModel.getImagesFromDB(it) }
+
+        // TODO: Use the ViewModel
+        viewModel.imagelist.observe(viewLifecycleOwner) {
+            initRecyclerView()
+        }
+
     }
+
     //todo make separate function for both fragment as util - refactor
     private fun initRecyclerView() {
         //set myonclickFunction in adapter

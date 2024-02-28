@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -38,6 +39,14 @@ android {
     }
 }
 
+    val retrofitVersion = "2.9.0"
+    val daggerVersion = "2.50"
+    val dagger = "com.google.dagger:dagger:$daggerVersion"
+    val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+    val daggerAndroid = "com.google.dagger:dagger-android:$daggerVersion"
+    val daggerAndroidSupport = "com.google.dagger:dagger-android-support:$daggerVersion"
+    val daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:$daggerVersion"
+
 dependencies {
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -62,13 +71,27 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation ("com.github.bumptech.glide:recyclerview-integration:4.14.2")
 
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-// https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    //retrofit
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     //splash
     implementation("androidx.core:core-splashscreen:1.0.1")
     //swipe to refresh
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    //dagger2
+    implementation(dagger)
+    kapt(daggerCompiler)
+    implementation(daggerAndroid)
+    implementation(daggerAndroidSupport)
+    kapt(daggerAndroidCompiler)
+
+    val retrofitVersion = "2.9.0"
+    val daggerVersion = "2.50"
+    val dagger = "com.google.dagger:dagger:$daggerVersion"
+    val daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+    val daggerAndroid = "com.google.dagger:dagger-android:$daggerVersion"
+    val daggerAndroidSupport = "com.google.dagger:dagger-android-support:$daggerVersion"
+    val daggerAndroidCompiler = "com.google.dagger:dagger-android-processor:$daggerVersion"
 
 }

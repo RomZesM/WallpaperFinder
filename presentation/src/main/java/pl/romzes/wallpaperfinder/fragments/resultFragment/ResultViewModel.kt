@@ -17,12 +17,11 @@ import pl.romzes.domain.usecases.GetImagesFromDBUseCase
 import pl.romzes.domain.usecases.SaveFavImageUseCase
 
 
-class ResultViewModel() : ViewModel() {
+class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCase,
+                      private val getImagesFromDBUseCase: GetImagesFromDBUseCase,
+                      private val saveFavImageUseCase : SaveFavImageUseCase,
+                      private val deleteFavImageUseCase: DeleteFavImageUseCase) : ViewModel() {
     val TAG = "rmz"
-    private val getImageFromApiUseCase = GetImagesFromAPIUseCase(ApiInterfaceImpl())
-    private val getImagesFromDBUseCase = GetImagesFromDBUseCase(DataBaseInterfaceImpl())
-    private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
-    private val deleteFavImageUseCase = DeleteFavImageUseCase(DataBaseInterfaceImpl())
 
 
     val imagelist : MutableLiveData<List<ImagePreview>> by lazy{
@@ -69,7 +68,7 @@ class ResultViewModel() : ViewModel() {
        }
     }
 
-    fun isInFavourite(image: ImagePreview) : Boolean{
+   private fun isInFavourite(image: ImagePreview) : Boolean{
         imagelistFavourite.value?.forEach{
             if(image.imageUnsplashId == it.imageUnsplashId)
                 return true
@@ -83,7 +82,6 @@ class ResultViewModel() : ViewModel() {
             val imagelistFav = getImagesFromDBUseCase.getUseCase(context)
             imagelistFavourite.postValue(imagelistFav)
         }
-
     }
 
     fun saveFavouriteImage(context: Context, image: ImagePreview){
@@ -98,13 +96,12 @@ class ResultViewModel() : ViewModel() {
         }
     }
 
-
     fun setUserRequest(msg : String) {
         userRequest.value = msg;
     }
 
-    fun getUserRequest() : String {
-        return userRequest.value.toString()
-    }
+//    fun getUserRequest() : String {
+//        return userRequest.value.toString()
+//    }
 
 }

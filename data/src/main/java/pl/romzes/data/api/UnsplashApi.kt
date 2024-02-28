@@ -1,3 +1,5 @@
+package pl.romzes.data.api
+
 import pl.romzes.data.models.UnsplashData
 import retrofit2.Call
 import retrofit2.http.GET

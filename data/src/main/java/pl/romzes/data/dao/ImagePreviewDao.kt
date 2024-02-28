@@ -11,7 +11,6 @@ import pl.romzes.domain.model.ImagePreview
 interface ImagePreviewDao {
     @Insert
     suspend fun insertImage(image : ImagePreviewEntity)
-
     @Query ("SELECT * FROM imagePreviews")
     suspend fun getAllImageViews() : List<ImagePreviewEntity>
     @Query ("DELETE FROM imagePreviews WHERE unsplashId = :unsplashId")

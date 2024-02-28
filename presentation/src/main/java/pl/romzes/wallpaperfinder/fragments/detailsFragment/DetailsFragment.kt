@@ -44,7 +44,7 @@ class DetailsFragment : Fragment(), Connector {
     ): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
     }
-
+    //TODO - refactor this -> use onViewCreated and obStart
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
@@ -60,6 +60,23 @@ class DetailsFragment : Fragment(), Connector {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 
+    override fun onStart() {
+        super.onStart()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
 }
