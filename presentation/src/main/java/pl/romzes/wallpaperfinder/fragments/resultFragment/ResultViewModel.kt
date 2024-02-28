@@ -48,7 +48,8 @@ class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCas
             }
             try {
                 val listFromApi =  getImageFromApi.await()
-               //check if image is in fav DB
+
+                //check if image is in fav DB
                 if(listFromApi.size > 0){
                     listFromApi.forEach {
                         if(isInFavourite(it)){
@@ -62,7 +63,7 @@ class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCas
                }
 
             } catch (e: Exception) {
-               Log.d(TAG, "getImagesFromApi: " + e.message)
+               Log.d(TAG, "getImagesFromApi(resultViewModel): " + e.message)
                error.postValue(e.message)
             }
        }

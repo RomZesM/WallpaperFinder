@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity(), Connector {
         if(savedInstanceState == null){
             displayFragment(SearchFieldFragment())
         }
-
     }
 
     //turnOn/Off the Up Arrow
