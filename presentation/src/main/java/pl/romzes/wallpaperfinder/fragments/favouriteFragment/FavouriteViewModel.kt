@@ -12,12 +12,16 @@ import pl.romzes.domain.model.ImagePreview
 import pl.romzes.domain.usecases.DeleteFavImageUseCase
 import pl.romzes.domain.usecases.GetImagesFromDBUseCase
 import pl.romzes.domain.usecases.SaveFavImageUseCase
+import javax.inject.Inject
 
-class FavouriteViewModel : ViewModel() {
+class FavouriteViewModel(private val getImagesFromDBUseCase : GetImagesFromDBUseCase,
+                         private val saveFavImageUseCase : SaveFavImageUseCase,
+                         private val deleteFavImageUseCase : DeleteFavImageUseCase) : ViewModel() {
     val TAG = "rmz"
-    private val getImagesFromDBUseCase = GetImagesFromDBUseCase(DataBaseInterfaceImpl())
-    private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
-    private val deleteFavImageUseCase = DeleteFavImageUseCase(DataBaseInterfaceImpl())
+//    private val getImagesFromDBUseCase = GetImagesFromDBUseCase(DataBaseInterfaceImpl())
+//    private val saveFavImageUseCase = SaveFavImageUseCase(DataBaseInterfaceImpl())
+//    private val deleteFavImageUseCase = DeleteFavImageUseCase(DataBaseInterfaceImpl())
+
 
 
     val imagelist : MutableLiveData<MutableList<ImagePreview>> = MutableLiveData<MutableList<ImagePreview>>()

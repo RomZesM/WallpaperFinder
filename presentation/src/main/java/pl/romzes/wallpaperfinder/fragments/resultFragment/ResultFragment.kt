@@ -42,7 +42,7 @@ class ResultFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //makeInjection?? from App
+        //makeInjection?? from App for all fields with @inject annotation
         (activity?.applicationContext as App).appComponent.inject(this)
 
 

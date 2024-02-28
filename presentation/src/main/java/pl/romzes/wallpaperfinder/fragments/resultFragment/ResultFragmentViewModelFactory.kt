@@ -24,8 +24,8 @@ class ResultFragmentViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
         return ResultViewModel(getImagesFromAPIUseCase,
-                getImagesFromDBUseCase,
-            saveFavImageUseCase,
-            deleteFavImageUseCase) as T
-    }
+                               getImagesFromDBUseCase,
+                               saveFavImageUseCase,
+                               deleteFavImageUseCase) as T
+}
 }
