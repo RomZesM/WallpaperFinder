@@ -31,6 +31,7 @@ class FavouriteFragment : Fragment() {
     lateinit var favouriteViewModelFactory : FavouriteViewModelFactory
 
     private lateinit var viewModel: FavouriteViewModel
+    private var spanCountInRV = 2
 
     private val rvAdapter = ImagePreviewRVAdapter(this)
 
@@ -61,6 +62,11 @@ class FavouriteFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        spanCountInRV = if(this.resources.configuration.orientation == 1){
+            2
+        } else
+            5
+
         context?.let { viewModel.getImagesFromDB(it) }
 
         // TODO: Use the ViewModel
@@ -94,7 +100,7 @@ class FavouriteFragment : Fragment() {
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view_id) //get the recycler view from fragment
         //config recyclerView
-        recyclerView?.layoutManager = GridLayoutManager(context, 2) //set options for display elements on view
+        recyclerView?.layoutManager = GridLayoutManager(context, spanCountInRV) //set options for display elements on view
         recyclerView?.adapter = rvAdapter //attach adapter, we can change different adapters for display info in RV
         viewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it)
         }

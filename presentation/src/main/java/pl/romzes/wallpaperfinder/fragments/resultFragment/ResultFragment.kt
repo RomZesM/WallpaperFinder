@@ -1,6 +1,7 @@
 package pl.romzes.wallpaperfinder.fragments.resultFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,9 @@ class ResultFragment : Fragment() {
 
     val TAG = "rmz"//todo !del
     private val rvAdapter = ImagePreviewRVAdapter(this)
+    private var spanCountInRV = 2;
     private var userSearchRequest : String? = null
+
 
     @Inject
     lateinit var resultFragmentVMFactory : ResultFragmentViewModelFactory
@@ -95,6 +98,10 @@ class ResultFragment : Fragment() {
         //first get the imageListFrom DB  //todo why do i need a context here?
         context?.let { resultViewModel.getImagesFromDB(it) }
         //getImagesFromApi()  //--here get image on user request
+        spanCountInRV = if(this.resources.configuration.orientation == 1){
+            2
+        } else
+            5
 
     }
 
@@ -148,7 +155,7 @@ class ResultFragment : Fragment() {
 
         val recyclerView = view?.findViewById<RecyclerView>(R.id.recycler_view_id) //get the recycler view from fragment
         //config recyclerView
-        recyclerView?.layoutManager = GridLayoutManager(context, 2) //set options for display elements on view
+        recyclerView?.layoutManager = GridLayoutManager(context, spanCountInRV) //set options for display elements on view
         recyclerView?.adapter = rvAdapter //attach adapter, we can change different adapters for display info in RV
         resultViewModel.imagelist.value?.let { rvAdapter.setImagePreviewIntoRecyclerView(it)
         }
