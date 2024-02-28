@@ -8,4 +8,6 @@
     <string name="no_result_for_query">There is no such images on Unsplash.com</string>
     <string name="button_search">Search</string>
     <string name="detail_fragment_title">Image details</string>
+    <string name="detail_view_width_field">Original image width</string>
+    <string name="detail_view_height_field">Original image height</string>
 </resources>
