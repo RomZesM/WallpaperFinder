@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import pl.romzes.domain.model.ImagePreview
 import pl.romzes.wallpaperfinder.MainActivity
@@ -42,41 +43,26 @@ class DetailsFragment : Fragment(), Connector {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
-    }
-    //TODO - refactor this -> use onViewCreated and obStart
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+        val activity : MainActivity = (requireActivity() as MainActivity)
+        //Change text in toolbox
+        activity.findViewById<Toolbar>(R.id.toolbar_id)?.title = getString(R.string.detail_fragment_title)
+        //show back button
+        activity.showUpButton(true);
+
         viewModel = ViewModelProvider(this).get(DetailsViewModel::class.java)
 
+        val rootView = inflater.inflate(R.layout.fragment_details, container, false)
+
         //set text and image into fragment
-        val imageView = requireView().findViewById<ImageView>(R.id.detail_image_id)
-        val imageDescField  = requireView().findViewById<TextView>(R.id.detail_description_id)
+        val imageView = rootView.findViewById<ImageView>(R.id.detail_image_id)
+        val imageDescField  = rootView.findViewById<TextView>(R.id.detail_description_id)
+        //todo make it with view model
         imageUrl?.let { imageView.getImageFromURL(requireActivity() as MainActivity, it) }
         imageDescField.text = imageDescription
 
-        //show back button
-        (requireActivity() as MainActivity).showUpButton(true);
 
+        return rootView
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
 }
