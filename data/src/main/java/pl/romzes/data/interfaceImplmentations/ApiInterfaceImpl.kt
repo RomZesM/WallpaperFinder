@@ -1,26 +1,13 @@
 package pl.romzes.data.interfaceImplmentations
 
-import UnsplashApi
+import pl.romzes.data.api.UnsplashApi
 import android.util.Log
-import org.json.JSONObject
 import pl.romzes.domain.model.ImagePreview
 import pl.romzes.domain.interfaces.ApiInterface
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiInterfaceImpl (retrofit: Retrofit) : ApiInterface {
+class ApiInterfaceImpl (private val api : UnsplashApi) : ApiInterface {
 
     val TAG  = "rmz"
-
-//    val unsplashBaseUrl : String = "https://api.unsplash.com/"
-//    private val api : UnsplashApi = Retrofit.Builder()
-//        .baseUrl(unsplashBaseUrl)
-//        .addConverterFactory(GsonConverterFactory.create()) //create converter from json into data object
-//        .build() //build request
-//        .create(UnsplashApi::class.java)
-
-        private val api : UnsplashApi = retrofit.create(UnsplashApi::class.java)
-
 
     override suspend fun getImagesFromUnsplashApi(request: String) : List<ImagePreview>{
 
@@ -38,9 +25,7 @@ class ApiInterfaceImpl (retrofit: Retrofit) : ApiInterface {
             Log.e(TAG, "getImagesFromUnsplashApi: couldn't receive data from unsplash api", )
             throw Exception("Sorry, connection problem, try again later")
         }
-//        Log.d(TAG, "getImagesFromUnsplashApi: isSuccess - " + response.isSuccessful )
-//        Log.d(TAG, "getImagesFromUnsplashApi: body - " + response.body() )
+        Log.d(TAG, "getImagesFromUnsplashApi: isSuccess - " + response.isSuccessful )
         return imagePreviewsList
     }
-
 }
