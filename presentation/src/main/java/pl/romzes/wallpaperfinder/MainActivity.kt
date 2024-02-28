@@ -17,10 +17,12 @@ class MainActivity : AppCompatActivity(), Connector {
 
     val TAG = "rmz"
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //Thread.sleep(3000) - make animation longer
-        installSplashScreen()
+        Log.d(TAG, "Activity onCreate:")
 
+        //must be BEFORE  superOnCreate to avoid crash while config changing in scenario  ->
+        //when fragment has no ViewModel
+        installSplashScreen()
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //init toolbar
         val toolbar : Toolbar = findViewById(R.id.toolbar_id)
