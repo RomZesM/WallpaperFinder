@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import pl.romzes.wallpaperfinder.R
 import pl.romzes.wallpaperfinder.databinding.ImagePreviewLayoutBinding
 import pl.romzes.domain.model.ImagePreview
+import pl.romzes.wallpaperfinder.fragments.favouriteFragment.FavouriteFragment
 import pl.romzes.wallpaperfinder.utils.MyRecyclerViewOnClickListener
 
 
@@ -24,7 +25,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
 
     //that class contain reference to the objects - item, that wold be drown in RV
     //item in our case would be ->
-    class ImagePreviewViewHolder(item : View, fragment: Fragment) : RecyclerView.ViewHolder(item){
+    class ImagePreviewViewHolder(item : View, private val fragment: Fragment) : RecyclerView.ViewHolder(item){
         //we use binding - object with reference to layout components
         // we can use  val textView = item.findViewById<TextView>(R.id.image_description_id) instead
         //but bindingView is more usefully
@@ -36,17 +37,17 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
             //binding.imagePreviewId.setImageResource(imagePreview.imageId)
             binding.imageDescriptionId.text = imagePreview.description
 
-            //check if this image is in fav
-            if(imagePreview.isFav){
-                binding.favouriteIconId.setImageResource(R.drawable.icon_heart_black)
+            //check if this image is in fav, or if we display images in favFragment
+            if(imagePreview.isFav || fragment is FavouriteFragment){
+                binding.favouriteIconId.setImageResource(R.drawable.icon_heart_black_2)
                 //use tag to understand what item is it (we can use image id instead tag
                 binding.favouriteIconId.tag = "black"
             }
-            else  if(!imagePreview.isFav){
-               binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty)
+            else {
+               binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty_2)
                binding.favouriteIconId.tag = "empty"
-
             }
+            Log.d("rmz", "bind: " + fragment.toString())
 
         }
     }
@@ -73,7 +74,6 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
                 myRecyclerViewOnClickListener!!.onClick(position)
             }
         }
-
         holder.binding.favouriteIconId.setOnClickListener{
             if (myRecyclerViewOnClickListener != null) {
                 myRecyclerViewOnClickListener!!.favOnClick(imagePrewList[position], position)
