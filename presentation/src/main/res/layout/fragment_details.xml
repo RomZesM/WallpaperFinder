@@ -1,29 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.detailsFragment.DetailsFragment">
 
-    <ImageView
-        android:id="@+id/detail_image_id"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/detail_description_id"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/detail_description_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Hello from Datail frgment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/content_start"
+            app:layout_constraintGuide_begin="16dp"
+            android:orientation="vertical"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/content_end"
+            app:layout_constraintGuide_end="16dp"
+            android:orientation="vertical"
+            />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/detail_image_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/android_test"
+            android:padding="16dp"/>
+
+
+        <TextView
+            android:id="@+id/label_description_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_label_description"
+            app:layout_constraintTop_toBottomOf="@id/detail_image_id"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+        <TextView
+            android:id="@+id/detail_description_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_sample_description"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/label_description_id"
+            app:layout_constraintStart_toEndOf="@id/label_description_id"
+            app:layout_constraintTop_toBottomOf="@id/detail_image_id"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_bottom_section_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="detail_description_id, label_description_id"
+            />
+        
+        <TextView
+            android:id="@+id/width_field_label_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/detail_label_width"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/barrier_bottom_section_description" />
+
+        <TextView
+            android:id="@+id/width_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_sample_width"
+            app:layout_constraintStart_toEndOf="@id/width_field_label_id"
+            app:layout_constraintBaseline_toBaselineOf="@id/width_field_label_id"
+            android:layout_marginStart="8dp"
+           />
+
+
+        <TextView
+            android:id="@+id/height_field_label_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_label_height"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/width_field_label_id"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:id="@+id/height_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_sample_height"
+            app:layout_constraintStart_toEndOf="@id/height_field_label_id"
+            app:layout_constraintBaseline_toBaselineOf="@id/height_field_label_id"
+            android:layout_marginStart="8dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</ScrollView>

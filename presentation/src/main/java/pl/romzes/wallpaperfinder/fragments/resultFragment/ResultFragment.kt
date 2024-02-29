@@ -124,9 +124,13 @@ class ResultFragment : Fragment() {
            //on click we open new fragment with parameters of images
             //todo add some more parameters
             override fun onClick(position: Int) {
+                val imagePreview = resultViewModel.imagelist.value?.get(position)
+
                 (requireActivity() as MainActivity).displayFragment(DetailsFragment.newInstance(
-                    imageUrl = resultViewModel.imagelist.value?.get(position)?.imageUrl.toString(),
-                    imageDescription = resultViewModel.imagelist.value?.get(position)?.description.toString()
+                    imageUrl = imagePreview?.imageUrl.toString(),
+                    imageDescription = imagePreview?.description.toString(),
+                    width =  imagePreview?.width.toString(),
+                    height =  imagePreview?.height.toString()
                 ))
             }
             //onclick listener for heart in RV

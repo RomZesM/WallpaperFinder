@@ -80,11 +80,13 @@ class FavouriteFragment : Fragment() {
             //on click we open new fragment with parameters of images
             //todo add some more parameters
             override fun onClick(position: Int) {
-                (requireActivity() as MainActivity).displayFragment(
-                    DetailsFragment.newInstance(
-                    imageUrl = viewModel.imagelist.value?.get(position)?.imageUrl.toString(),
-                    imageDescription = viewModel.imagelist.value?.get(position)?.description.toString()
+                val imagePreview = viewModel.imagelist.value?.get(position)
 
+                (requireActivity() as MainActivity).displayFragment(DetailsFragment.newInstance(
+                    imageUrl = imagePreview?.imageUrl.toString(),
+                    imageDescription = imagePreview?.description.toString(),
+                    width =  imagePreview?.width.toString(),
+                    height =  imagePreview?.height.toString()
                 ))
             }
             override fun favOnClick(image : ImagePreview, position : Int) {

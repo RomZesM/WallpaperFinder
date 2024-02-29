@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "pl.romzes.data"
-    compileSdk = 34
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 25
