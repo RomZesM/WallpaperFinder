@@ -21,6 +21,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
     //onclick listener, set through preview Fragment
     private var myRecyclerViewOnClickListener : MyRecyclerViewOnClickListener? = null
 
+
     //that class contain reference to the objects - item, that wold be drown in RV
     //item in our case would be ->
     class ImagePreviewViewHolder(item : View, fragment: Fragment) : RecyclerView.ViewHolder(item){
@@ -44,6 +45,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
             else  if(!imagePreview.isFav){
                binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty)
                binding.favouriteIconId.tag = "empty"
+
             }
 
         }
@@ -80,6 +82,7 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
 
         Glide.with(fragment)
             .load(imagePrewList[position].imageUrl)
+            .override(dpToInt(400, fragment), dpToInt(200, fragment))
             .into(holder.binding.imagePreviewId)
 
     }
@@ -92,6 +95,12 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
     //add listener from outside as dependency
     fun setMyOnclickListener(listener : MyRecyclerViewOnClickListener){
         this.myRecyclerViewOnClickListener = listener;
+    }
+
+    private fun dpToInt(dp : Int, fragment : Fragment) : Int{
+        val scale: Float = fragment.resources.getDisplayMetrics().density
+        val pixels = (dp * scale + 0.5f).toInt()
+        return pixels
     }
 
 }
