@@ -47,8 +47,6 @@ class ImagePreviewRVAdapter(private val fragment: Fragment) : RecyclerView.Adapt
                binding.favouriteIconId.setImageResource(R.drawable.icon_heart_empty_2)
                binding.favouriteIconId.tag = "empty"
             }
-            Log.d("rmz", "bind: " + fragment.toString())
-
         }
     }
 

@@ -33,7 +33,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerVertical="true"
                     android:layout_marginTop="-1dp"
-                    android:src="@drawable/android_test" />
+                    android:src="@drawable/android_test"
+                   />
 
                 <ImageView
                     android:id="@+id/favourite_icon_id"
