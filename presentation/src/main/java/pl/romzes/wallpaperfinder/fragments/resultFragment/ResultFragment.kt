@@ -30,6 +30,7 @@ class ResultFragment : Fragment() {
     private val rvAdapter = ImagePreviewRVAdapter(this)
     private var spanCountInRV = 2;
     private var userSearchRequest : String? = null
+    private var imageListWasLoaded : Boolean = false;
 
 
     @Inject
@@ -63,12 +64,19 @@ class ResultFragment : Fragment() {
         resultViewModel.imagelist.observe(this) {
             initRecyclerView()
             hideProgressBar()
+            //todo-remove? kostyl'
+            hideErrorMessage()
+            imageListWasLoaded = true
         }
         resultViewModel.error.observe(this){
             showErrorMessage(resultViewModel.error.value)
             hideProgressBar()
         }
 
+        //first get the imageListFrom DB
+        if(savedInstanceState == null){
+            context?.let { resultViewModel.getImagesFromDB(it) }
+        }
     }
 
     override fun onCreateView(
@@ -90,21 +98,21 @@ class ResultFragment : Fragment() {
              swipeToRefresh.isRefreshing = false;
              getImagesFromApi()
          }
-
      return inflatedView
     }
 
     override fun onStart() {
         super.onStart()
-
-        //first get the imageListFrom DB  //todo why do i need a context here?
-        context?.let { resultViewModel.getImagesFromDB(it) }
         //getImagesFromApi()  //--here get image on user request
         spanCountInRV = if(this.resources.configuration.orientation == 1){
             2
         } else
             5
-
+        //try to avoid
+        if(imageListWasLoaded){
+            initRecyclerView()
+            hideProgressBar()
+        }
     }
 
     private fun getImagesFromApi() {
@@ -174,6 +182,11 @@ class ResultFragment : Fragment() {
             errorTextView?.text = message;
         }
         errorTextView?.visibility = View.VISIBLE
+    }
+
+    private fun hideErrorMessage(){
+        val errorTextView = view?.findViewById<TextView>(R.id.error_text_field_id)
+        errorTextView?.visibility = View.GONE
     }
 
     private fun hideProgressBar(){

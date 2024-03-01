@@ -41,32 +41,31 @@ class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCas
     }
 
     fun getImagesFromApi(request: String, context: Context){
-        viewModelScope.launch(Dispatchers.IO){
-
-            val getImageFromApi = viewModelScope.async (Dispatchers.IO) {
-                getImageFromApiUseCase.execute(request)
-            }
-            try {
-                val listFromApi =  getImageFromApi.await()
-
-                //check if image is in fav DB
-                if(listFromApi.size > 0){
-                    listFromApi.forEach {
-                        if(isInFavourite(it)){
-                            it.isFav = true;
-                        }
-                        imagelist.postValue(listFromApi)
-                    }
+           viewModelScope.launch(Dispatchers.IO){
+                val getImageFromApi = viewModelScope.async (Dispatchers.IO) {
+                    getImageFromApiUseCase.execute(request)
                 }
-               else{
-                   error.postValue("Nothing was found for your query, please change your query and try again")
-               }
+                try {
+                    val listFromApi =  getImageFromApi.await()
 
-            } catch (e: Exception) {
-               Log.d(TAG, "getImagesFromApi(resultViewModel): " + e.message)
-               error.postValue(e.message)
+                    //check if image is in fav DB
+                    if(listFromApi.size > 0){
+                        listFromApi.forEach {
+                            if(isInFavourite(it)){
+                                it.isFav = true;
+                            }
+                            imagelist.postValue(listFromApi)
+                        }
+                    }
+                    else{
+                        error.postValue("Nothing was found for your query, please change your query and try again")
+                    }
+
+                } catch (e: Exception) {
+                    Log.d(TAG, "getImagesFromApi(resultViewModel): " + e.message)
+                    error.postValue(e.message)
+                }
             }
-       }
     }
 
    private fun isInFavourite(image: ImagePreview) : Boolean{
@@ -79,6 +78,7 @@ class ResultViewModel(private val getImageFromApiUseCase: GetImagesFromAPIUseCas
 
     fun getImagesFromDB(context: Context){
         //TODO remake as async/await
+
         viewModelScope.launch(Dispatchers.IO){
             val imagelistFav = getImagesFromDBUseCase.getUseCase(context)
             imagelistFavourite.postValue(imagelistFav)
